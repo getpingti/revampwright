@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kitchens — Hartman Custom Cabinets</title><meta name="robots" content="noindex,nofollow">
+<style>
+:root{--wood:#7a4a21;--wood-d:#5d3717;--cream:#faf6ef;--ink:#26221c;--mut:#6f675a}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,'Segoe UI',Roboto,Arial,sans-serif;color:#26221c;background:#faf6ef;line-height:1.6}
+a{color:#7a4a21}
+.wrap{max-width:1020px;margin:0 auto;padding:0 20px}
+.topbar{background:#26221c;color:#e8e0cf;font-size:14px;padding:7px 0}
+.topbar .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+header.site{background:#fff;border-bottom:3px solid #7a4a21;position:sticky;top:0;z-index:20}
+header.site .wrap{display:flex;align-items:center;height:66px;gap:24px}
+.logo{font-family:Georgia,serif;font-size:22px;font-weight:700;color:#26221c}
+.logo span{color:#7a4a21}
+nav{margin-left:auto;display:flex;gap:20px;font-size:15px}
+nav a{color:#26221c;text-decoration:none}
+nav a:hover{color:#7a4a21}
+.hero{background:linear-gradient(120deg,#3a2a18,#7a4a21);color:#fff;padding:64px 0}
+.hero h1{font-family:Georgia,serif;font-size:40px;line-height:1.2;max-width:640px}
+.hero p{margin:16px 0 24px;color:#ead9bd;font-size:18px;max-width:560px}
+.btn{display:inline-block;background:#e07b24;color:#fff;padding:12px 24px;border-radius:8px;font-weight:600;text-decoration:none;border:0;cursor:pointer;font-size:16px}
+.btn:hover{background:#c86414}
+.btn.light{background:#fff;color:#5d3717}
+section{padding:48px 0}
+h2{font-family:Georgia,serif;font-size:29px;margin-bottom:12px}
+.lede{color:#6f675a;max-width:620px;margin-bottom:26px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+.card{background:#fff;border:1px solid #e7ddcb;border-radius:12px;padding:22px}
+.card h3{font-size:17px;margin-bottom:7px}
+.card p{color:#6f675a;font-size:15px}
+.photo{height:170px;border-radius:10px;background:linear-gradient(135deg,#a97c50,#7a4a21);display:flex;align-items:flex-end;padding:12px;color:#fff;font-size:13.5px;margin-bottom:12px}
+footer{background:#26221c;color:#b9b0a0;padding:36px 0;font-size:14.5px}
+footer .wrap{display:flex;gap:36px;flex-wrap:wrap}
+footer b{color:#fff}
+.sample-note{width:100%;border-top:1px solid #45403a;margin-top:10px;padding-top:14px;color:#8f877a;font-size:13px}
+.fc-lock{cursor:pointer;border-bottom:1px dotted transparent}
+.fc-lock:hover{border-bottom:1px dotted #e07b24}
+.fc-peek{background:#fff0c2;border-radius:4px;padding:0 2px;color:#26221c}
+#fc-bar{position:fixed;left:0;right:0;bottom:0;z-index:999;background:#17191d;color:#f3efe7;padding:10px 16px;display:flex;gap:12px;align-items:center;justify-content:center;flex-wrap:wrap;font-size:14.5px;box-shadow:0 -2px 14px rgba(0,0,0,.25)}
+#fc-bar button{background:#e07b24;color:#fff;border:0;border-radius:7px;padding:8px 18px;font-weight:600;cursor:pointer}
+#fc-bar.done{background:#1d5c33}
+#fc-mask{position:fixed;inset:0;background:rgba(10,10,12,.66);z-index:1000;display:none;align-items:center;justify-content:center;padding:18px}
+#fc-modal{background:#fff;border-radius:16px;max-width:430px;width:100%;padding:30px 28px;text-align:center;max-height:92vh;overflow:auto}
+#fc-modal h3{font-family:Georgia,serif;font-size:23px;margin-bottom:8px}
+#fc-modal p{color:#5c6066;font-size:15px}
+#fc-modal .price{font-family:Georgia,serif;font-size:40px;font-weight:700;margin:12px 0 2px}
+#fc-modal input{width:100%;padding:12px;border:1.5px solid #d8d2c4;border-radius:9px;font-size:16px;text-align:center;letter-spacing:1px;margin:12px 0 10px;text-transform:uppercase}
+#fc-modal .buy{display:block;background:#17191d;color:#fff;padding:13px;border-radius:9px;font-weight:600;text-decoration:none;margin-top:14px}
+#fc-modal .act{width:100%;background:#e07b24;color:#fff;border:0;padding:13px;border-radius:9px;font-weight:600;font-size:16px;cursor:pointer}
+#fc-modal .x{float:right;background:none;border:0;font-size:21px;cursor:pointer;color:#8b8578}
+#fc-err{color:#c0392b;font-size:14px;min-height:19px}
+#fc-done-panel{display:none}
+.confetti{position:fixed;top:-12px;z-index:1001;pointer-events:none;border-radius:2px}
+@keyframes fcfall{to{transform:translateY(105vh) rotate(720deg)}}
+.shake{animation:shk .3s}
+@keyframes shk{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.flash{background:#ffe9a8!important;transition:background .4s}
+body{padding-bottom:52px}
+</style></head>
+<body>
+<div class="topbar"><div class="wrap"><span>Springfield, Illinois · Custom kitchens &amp; cabinetry since 1998</span><span>Call: <span class="fc-lock" data-v="(217) 555-0147" data-ph="(123) 456-7890">(123) 456-7890</span></span></div></div>
+<header class="site"><div class="wrap"><a class="logo" href="/demo/">Hartman <span>Custom Cabinets</span></a>
+<nav><a href="/demo/">Home</a><a href="/demo/kitchens.html" style="color:#7a4a21;font-weight:700">Kitchens</a><a href="/demo/gallery.html">Gallery</a><a href="/demo/about.html">About</a><a href="/demo/contact.html">Contact</a></nav></div></header>
+
+<section><div class="wrap"><h2>Kitchens</h2><p class="lede">Every kitchen starts with a free in-home measure and a fixed written quote. Most kitchens install in 3–5 days once cabinets are built.</p>
+<div class="cards">
+<div class="card"><div class="photo">Shaker kitchen — white oak, Springfield</div><h3>Shaker</h3><p>Our most requested style. Clean lines, inset or overlay doors, any paint color. From $18,400 installed for a typical 10×12 kitchen.</p></div>
+<div class="card"><div class="photo">Slab front kitchen — walnut, Chatham</div><h3>Modern slab</h3><p>Flat fronts in walnut or rift-sawn oak with integrated pulls. From $21,900 installed.</p></div>
+<div class="card"><div class="photo">Raised panel kitchen — cherry, Rochester</div><h3>Traditional raised panel</h3><p>Cherry and maple with furniture details, crown and light rail. From $23,500 installed.</p></div>
+</div>
+<p style="margin-top:24px">Prices include cabinets, hardware, delivery and installation. Countertops quoted separately by material. Call <span class="fc-lock" data-v="(217) 555-0147" data-ph="(123) 456-7890">(123) 456-7890</span> to book a measure.</p>
+</div></section>
+<footer><div class="wrap">
+<div><b>Hartman Custom Cabinets</b><br>1420 Industrial Parkway<br>Springfield, IL 62703</div>
+<div><b>Contact</b><br>Phone: <span class="fc-lock" data-v="(217) 555-0147" data-ph="(123) 456-7890">(123) 456-7890</span><br>Email: <span class="fc-lock" data-v="hello@hartmancabinets.com" data-ph="abc123@def.com">abc123@def.com</span></div>
+<div><b>Hours</b><br>Mon–Fri 8:00–17:00<br>Sat by appointment</div>
+<div class="sample-note">Sample website built by RevampWright — Hartman Custom Cabinets is a fictional business created for demonstration.</div>
+</div></footer>
+
+<div id="fc-bar"><span id="fc-bar-t">This is a finished website in preview — contact details activate when the owner activates the site.</span><button id="fc-bar-b" type="button">Activate — $499</button></div>
+<div id="fc-mask"><div id="fc-modal">
+<div id="fc-form-panel">
+<button class="x" id="fc-close" type="button">&times;</button>
+<h3>Activate this website</h3>
+<p>One-time payment. Includes the first 12 months of hosting &amp; care, then $299/year (cancel anytime).</p>
+<div class="price">$499</div>
+<p>7-day money-back guarantee.</p>
+<a class="buy" href="/pricing.html">Buy &amp; get your activation code</a>
+<p style="margin:16px 0 0">Already have a code?</p>
+<input id="fc-code" type="text" placeholder="ENTER CODE" autocomplete="off">
+<div id="fc-err"></div>
+<button class="act" id="fc-go" type="button">Activate my website</button>
+<p style="margin-top:12px;font-size:13.5px">This is a sample — use code <b>SAMPLE-2026</b></p>
+</div>
+<div id="fc-done-panel">
+<div style="font-size:44px">&#127881;</div>
+<h3>Your website is live!</h3>
+<p>Congratulations — this website is now officially open at<br><b>hartman.revampwright.com</b></p>
+<p style="margin-top:10px">Your free custom domain (.cc) will be connected within 24 hours. Dashboard access details are on their way to your inbox.</p>
+<button class="act" id="fc-close2" type="button" style="margin-top:16px">View my live website</button>
+</div>
+</div></div>
+<script>
+(function(){
+var CODE='SAMPLE-2026',KEY='rw_act_demo',done=false;
+function $(s){return document.querySelector(s)}
+function bar(){$('#fc-bar-t').textContent='\u2713 Website live \u2014 sample activation complete.';$('#fc-bar').classList.add('done');$('#fc-bar-b').style.display='none';}
+function setDone(){done=true;bar();document.querySelectorAll('.fc-lock').forEach(function(el){el.textContent=el.getAttribute('data-v');el.classList.add('flash');});}
+function openM(){if(done)return;$('#fc-mask').style.display='flex';setTimeout(function(){$('#fc-code').focus()},60);}
+function closeM(){$('#fc-mask').style.display='none';}
+function confetti(){var colors=['#e07b24','#f2b04a','#7a4a21','#3f7d4e','#f3efe7'];for(var i=0;i<110;i++){var d=document.createElement('div');d.className='confetti';var s=6+Math.random()*7;d.style.cssText='left:'+(Math.random()*100)+'vw;width:'+s+'px;height:'+(s*0.55)+'px;background:'+colors[i%colors.length]+';animation:fcfall '+(2.2+Math.random()*1.8)+'s ease-in forwards;transform:rotate('+(Math.random()*360)+'deg)';document.body.appendChild(d);setTimeout(function(el){el.remove()},4500,d);}}
+function tryAct(){var v=$('#fc-code').value.trim().toUpperCase();if(v===CODE){closeM();setDone();confetti();$('#fc-mask').style.display='flex';$('#fc-form-panel').style.display='none';$('#fc-done-panel').style.display='block';localStorage.setItem(KEY,'1');}else{$('#fc-err').textContent='That code doesn\'t match. Sample code: '+CODE;$('#fc-modal').classList.remove('shake');void $('#fc-modal').offsetWidth;$('#fc-modal').classList.add('shake');}}
+document.addEventListener('DOMContentLoaded',function(){
+  if(localStorage.getItem(KEY)==='1'){setDone();}
+  document.addEventListener('click',function(e){
+    var t=e.target.closest('[data-fc-open],.fc-lock');
+    if(t){e.preventDefault();openM();}
+    if(e.target.id==='fc-mask'){closeM();}
+    if(e.target.id==='fc-close'||e.target.id==='fc-close2'){closeM();}
+    if(e.target.id==='fc-go'){tryAct();}
+    if(e.target.id==='fc-bar-b'){openM();}
+  });
+  document.addEventListener('mouseover',function(e){var t=e.target.closest('.fc-lock');if(t&&!done){t.textContent=t.getAttribute('data-v');t.classList.add('fc-peek');}});
+  document.addEventListener('mouseout',function(e){var t=e.target.closest('.fc-lock');if(t&&!done){t.textContent=t.getAttribute('data-ph');t.classList.remove('fc-peek');}});
+  $('#fc-code').addEventListener('keydown',function(e){if(e.key==='Enter'){tryAct();}});
+});
+})();
+</script>
+</body></html>
