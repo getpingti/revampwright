@@ -6,30 +6,42 @@
 <title>Sample website — RevampWright</title>
 <meta name="description" content="Try a complete customer preview: a fictional cabinet shop website with working activation, exactly as our customers experience it.">
 <link rel="stylesheet" href="/assets/site.css">
+<script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
-<header><div class="wrap">
+<div class="topbar"><div class="wrap">
+<span><b>Studio</b>&nbsp; Wuxi, Jiangsu, China</span>
+<span><b>Email</b>&nbsp; <a href="mailto:hello@revampwright.com">hello@revampwright.com</a></span>
+<span class="right"><span>Replies within one business day</span><span>Preview first · Pay second</span></span>
+</div></div>
+<header class="site"><div class="wrap">
 <a class="logo" href="/">Revamp<b>Wright</b></a>
-<nav><a href="/pricing.html">Pricing</a><a href="/how-it-works.html">How it works</a><a href="/sample.html" style="color:#fff;font-weight:600">Sample</a><a href="/about.html">About</a><a href="/contact.html">Contact</a></nav>
+<nav class="main"><a href="/pricing.html">Pricing</a><a href="/how-it-works.html">How it works</a><a href="/sample.html" class="on">Sample</a><a href="/about.html">About</a><a href="/contact.html">Contact</a></nav>
+<a class="btn" href="/sample.html">View a sample</a>
 </div></header>
+<div class="pagehero"><div class="wrap"><div class="crumb">Home · Sample</div><h1>See exactly what a customer sees</h1><p>This sample is a complete preview of a website we built for a fictional cabinet shop, Hartman Custom Cabinets. It works the way every customer preview works.</p></div></div>
 
-<main><section><div class="wrap">
-<h2>See exactly what a customer sees</h2>
-<p class="lede">This sample is a complete preview of a website we built for a fictional cabinet shop, Hartman Custom Cabinets. It works the way every customer preview works.</p>
-<div class="cards">
-<div class="card"><h3>1. Browse the preview</h3><p>Every page is finished. Notice the phone numbers — they are placeholders, and hovering reveals the real one. That itch to fix the wrong number? That's the point of the preview.</p></div>
-<div class="card"><h3>2. Try the activation</h3><p>Click any phone number or the activation bar, and enter the sample code <b>SAMPLE-2026</b>. The site activates with the full celebration — the same moment our customers get.</p></div>
-<div class="card"><h3>3. Imagine it's yours</h3><p>Your preview would carry your name, your products and your photos — built from your current website, at no cost and no obligation.</p></div>
+<section><div class="wrap">
+<div class="cards" style="margin-top:0">
+<div class="card rv"><div class="ic"><svg viewBox="0 0 24 24"><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6z"/><circle cx="12" cy="12" r="3"/></svg></div><h3>1. Browse the preview</h3><p>Every page is finished. Notice the phone numbers — they are placeholders, and hovering reveals the real one. That itch to fix the wrong number? That's the point of the preview.</p></div>
+<div class="card rv"><div class="ic"><svg viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></div><h3>2. Try the activation</h3><p>Click any phone number or the activation bar, and enter the sample code <b>SAMPLE-2026</b>. The site activates with the full celebration — the same moment our customers get.</p></div>
+<div class="card rv"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l1.9 4.6L18.5 9l-4.6 1.4L12 15l-1.9-4.6L5.5 9l4.6-1.4z"/><path d="M18.5 15.5l.8 2 2 .8-2 .8-.8 2-.8-2-2-.8 2-.8z"/></svg></div><h3>3. Imagine it's yours</h3><p>Your preview would carry your name, your products and your photos — built from your current website, at no cost and no obligation.</p></div>
 </div>
-<p style="margin-top:26px"><a class="btn" href="/demo/">Open the sample website</a></p>
+<div class="gal" style="grid-template-columns:repeat(2,1fr);margin-top:34px">
+<a class="rv" href="/demo/"><img src="/assets/img/hero-craftsman.webp" alt="Sample website homepage" style="height:280px"><span class="cap">Open the sample website →</span></a>
+<a class="rv" href="/demo/kitchens.html"><img src="/assets/img/kitchen-showcase.webp" alt="Sample kitchen page" style="height:280px"><span class="cap">Browse its kitchens →</span></a>
+</div>
+<p style="margin-top:28px"><a class="btn" href="/demo/">Open the sample website</a></p>
 <p class="note" style="margin-top:14px">Hartman Custom Cabinets is a fictional business created for this demonstration. Any resemblance to a real company is coincidental.</p>
-</div></section></main>
-
+</div></section>
 <footer><div class="wrap">
-<div><h4>RevampWright</h4><p>Finished websites for small<br>businesses. Preview first,<br>pay only if you love it.</p></div>
-<div><h4>Explore</h4><p><a href="/pricing.html">Pricing</a><br><a href="/how-it-works.html">How it works</a><br><a href="/sample.html">Sample website</a></p></div>
-<div><h4>Support</h4><p><a href="mailto:hello@revampwright.com">hello@revampwright.com</a><br>Replies within one<br>business day.</p></div>
-<div><h4>Legal</h4><p><a href="/legal.html#terms">Terms of Service</a><br><a href="/legal.html#refund">Refund Policy</a><br><a href="/legal.html#privacy">Privacy Policy</a></p></div>
+<div class="cols">
+<div><div class="flogo">Revamp<b>Wright</b></div><p style="margin-top:12px">Finished websites for small businesses. Preview first, pay only if you love it.</p></div>
+<div><h4>Explore</h4><ul><li><a href="/pricing.html">Pricing</a></li><li><a href="/how-it-works.html">How it works</a></li><li><a href="/sample.html">Sample website</a></li><li><a href="/about.html">About</a></li></ul></div>
+<div><h4>Our Service</h4><ul><li><a href="/how-it-works.html">Website redesign</a></li><li><a href="/pricing.html">Hosting &amp; care plan</a></li><li><a href="/pricing.html">Domain connection</a></li><li><a href="/legal.html#refund">Refund policy</a></li></ul></div>
+<div><h4>Get In Touch</h4><ul><li><a href="mailto:hello@revampwright.com">hello@revampwright.com</a></li><li>Replies within one business day</li><li>Fangcun Design, Wuxi, Jiangsu, China</li></ul></div>
+</div>
 <div class="fine">RevampWright is the English-language brand of Fangcun Design, a website design studio based in Wuxi, Jiangsu, China. © 2026 RevampWright. All rights reserved.</div>
 </div></footer>
+<script>var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.1});document.querySelectorAll('.rv').forEach(function(el){io.observe(el)});</script>
 </body></html>
