@@ -233,14 +233,12 @@ footer .fc-lock{color:#e8dcc4}
 (function(){
 var CODE='SAMPLE-2026',KEY='rw_act_demo',done=false;
 function $(s){return document.querySelector(s)}
-function bar(){$('#fc-bar-t').textContent='\u2713 Website live \u2014 sample activation complete.';$('#fc-bar').classList.add('done');$('#fc-bar-b').style.display='none';}
-function setDone(){done=true;bar();document.querySelectorAll('.fc-lock').forEach(function(el){el.textContent=el.getAttribute('data-v');el.classList.remove('fc-peek');el.classList.add('fc-live');});}
+function setDone(){done=true;$('#fc-bar').style.display='none';var cp=document.getElementById('cmp-pill');if(cp)cp.style.display='none';document.body.style.paddingBottom='0';document.querySelectorAll('.fc-lock').forEach(function(el){el.textContent=el.getAttribute('data-v');el.classList.remove('fc-peek');el.classList.add('fc-live');});}
 function openM(){if(done)return;$('#fc-mask').style.display='flex';setTimeout(function(){$('#fc-code').focus()},60);}
 function closeM(){$('#fc-mask').style.display='none';}
 function confetti(){var colors=['#d79d6c','#6b4a2f','#3f7d4e','#efe3cd','#fdd677'];for(var i=0;i<110;i++){var d=document.createElement('div');d.className='confetti';var s=6+Math.random()*7;d.style.cssText='left:'+(Math.random()*100)+'vw;width:'+s+'px;height:'+(s*0.55)+'px;background:'+colors[i%colors.length]+';animation:fcfall '+(2.2+Math.random()*1.8)+'s ease-in forwards;transform:rotate('+(Math.random()*360)+'deg)';document.body.appendChild(d);setTimeout(function(el){el.remove()},4500,d);}}
-function tryAct(){var v=$('#fc-code').value.trim().toUpperCase();if(v===CODE){closeM();setDone();confetti();$('#fc-mask').style.display='flex';$('#fc-form-panel').style.display='none';$('#fc-done-panel').style.display='block';localStorage.setItem(KEY,'1');}else{$('#fc-err').textContent='That code doesn\'t match. Sample code: '+CODE;$('#fc-modal').classList.remove('shake');void $('#fc-modal').offsetWidth;$('#fc-modal').classList.add('shake');}}
+function tryAct(){var v=$('#fc-code').value.trim().toUpperCase();if(v===CODE){closeM();setDone();confetti();$('#fc-mask').style.display='flex';$('#fc-form-panel').style.display='none';$('#fc-done-panel').style.display='block';}else{$('#fc-err').textContent='That code doesn\'t match. Sample code: '+CODE;$('#fc-modal').classList.remove('shake');void $('#fc-modal').offsetWidth;$('#fc-modal').classList.add('shake');}}
 document.addEventListener('DOMContentLoaded',function(){
-  if(localStorage.getItem(KEY)==='1'){setDone();}
   var slides=document.querySelectorAll('.slide'),dots=document.querySelectorAll('.dots button'),cur=0,timer=null;
   function go(n){if(!slides.length)return;slides[cur].classList.remove('on');if(dots[cur])dots[cur].classList.remove('on');cur=(n+slides.length)%slides.length;slides[cur].classList.add('on');if(dots[cur])dots[cur].classList.add('on');}
   if(slides.length>1){timer=setInterval(function(){go(cur+1)},5600);dots.forEach(function(d,i){d.addEventListener('click',function(){go(i);clearInterval(timer);timer=setInterval(function(){go(cur+1)},5600);});});}
