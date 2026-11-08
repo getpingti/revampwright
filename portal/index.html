@@ -105,7 +105,6 @@
     .style-card .card-pad{display:flex;flex-direction:column;flex:1}
     .style-card p{color:var(--muted);font-size:14.5px}
     .style-card .button{margin-top:auto}
-    .quota{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-top:18px}
     .domain-list{display:grid;gap:12px}
     .domain-row{display:flex;justify-content:space-between;gap:18px;align-items:center;border:1px solid var(--line);border-radius:7px;padding:16px;background:#FBFDFE}
     .domain-row strong{color:var(--navy);word-break:break-word}
@@ -176,7 +175,7 @@
       .quick-grid,.style-grid{grid-template-columns:1fr}
       .style-grid .style-card:last-child{grid-column:auto}
       .card-pad,.form-card{padding:20px}
-      .domain-row,.quota,.contact-card{align-items:flex-start;flex-direction:column}
+      .domain-row,.contact-card{align-items:flex-start;flex-direction:column}
       .meta-row{display:block}.meta-row span:last-child{text-align:left;display:block;margin-top:2px}
       .wizard-step{font-size:12px}
       .demo-banner{font-size:12.5px}
@@ -282,7 +281,7 @@
           <button class="quick-action" type="button" data-open-section="style">
             <span class="qa-icon">◐</span>
             <strong>Change style</strong>
-            <span>Use your yearly free style change or preview another look.</span>
+            <span>Switch freely between your two included design styles.</span>
           </button>
           <a class="quick-action" href="/demo/">
             <span class="qa-icon">↗</span>
@@ -373,9 +372,8 @@
           </div>
         </article>
 
-        <div class="notice quota" id="style-quota" role="status">
-          <span><strong>Style-change allowance:</strong> Your care plan includes 1 free style change each year. You have <strong id="free-style-count">1 remaining</strong>.</span>
-          <span class="pill blue">No content changes</span>
+        <div class="notice" role="status" style="margin-top:18px">
+          <span>Your website includes two design styles. Switch between them anytime — free, as often as you like. Your content, pages and web address never change.</span>
         </div>
 
         <div class="style-grid" id="style-options" aria-label="Alternative design styles"></div>
@@ -564,7 +562,7 @@
           </details>
           <details>
             <summary>How do style changes work?</summary>
-            <div class="faq-body">Open the <strong>Style</strong> tab and choose another design. Your care plan includes one free style change each year; additional changes are $100 each and the price is shown before you confirm. A style change only replaces the design skin — your content, pages and web address stay the same.</div>
+            <div class="faq-body">Open the <strong>Style</strong> tab and choose the other design. Your website includes two design styles, and switching between them is free anytime — as often as you like. A style change only replaces the design skin — your content, pages and web address stay the same.</div>
           </details>
           <details>
             <summary>How do I connect my old domain?</summary>
@@ -724,23 +722,11 @@
           name: 'Modern Cool',
           description: 'Blue-grey, crisp and precise — a calm, contemporary workshop feel.',
           colors: ['#5B7C99', '#DCE8F0', '#2F4858', '#8FB8C8']
-        },
-        teckno: {
-          name: 'Teckno Bright',
-          description: 'Bright blue and cyan with a clean, energetic technology feel.',
-          colors: ['#1C74E8', '#2EB5C8', '#0A1A2E', '#EAF4FF']
-        },
-        harbor: {
-          name: 'Harbor Navy',
-          description: 'Deep navy and coral softened with warm, practical neutrals.',
-          colors: ['#0F1D3A', '#FF4A2E', '#F4EDE6', '#517A8A']
         }
       };
       var currentStyleKey = 'cozy';
-      var freeStyleChanges = 1;
       var pendingStyleKey = null;
       var styleOptions = document.getElementById('style-options');
-      var freeStyleCount = document.getElementById('free-style-count');
 
       function paletteHTML(colors, className) {
         return '<div class="palette ' + (className || '') + '" aria-hidden="true">' + colors.map(function (color) {
@@ -760,7 +746,6 @@
             '<button class="button secondary" type="button" data-switch-style="' + key + '">Switch to this style</button>' +
             '</div></article>';
         }).join('');
-        freeStyleCount.textContent = freeStyleChanges + ' remaining';
       }
 
       function applyStyle(key) {
@@ -781,36 +766,19 @@
         pendingStyleKey = button.getAttribute('data-switch-style');
         var style = styleCatalog[pendingStyleKey];
 
-        if (freeStyleChanges > 0) {
-          openModal({
-            title: 'Switch to ' + style.name + '?',
-            body: '<p>Your site will be re-skinned with <strong>' + style.name + '</strong>. Your content, pages and web address stay exactly the same.</p><p>This will use your 1 free style change for this plan year.</p>',
-            actions: [
-              { label: 'Not yet', className: 'button secondary', action: 'close' },
-              { label: 'Switch style', className: 'button', action: 'confirm' }
-            ],
-            onConfirm: function () {
-              freeStyleChanges = 0;
-              applyStyle(pendingStyleKey);
-              closeModal();
-              showToast('Style updated');
-            }
-          });
-        } else {
-          openModal({
-            title: 'Switch to ' + style.name + '?',
-            body: '<p>Your free style change for this plan year has been used.</p><div class="price-callout"><strong>$100</strong> per additional style change</div><p>Your content, pages and web address stay exactly the same. <strong>Demo only — no payment is taken.</strong></p>',
-            actions: [
-              { label: 'Cancel', className: 'button secondary', action: 'close' },
-              { label: 'Pay $100 & switch', className: 'button', action: 'confirm' }
-            ],
-            onConfirm: function () {
-              applyStyle(pendingStyleKey);
-              closeModal();
-              showToast('Style updated');
-            }
-          });
-        }
+        openModal({
+          title: 'Switch to ' + style.name + '?',
+          body: '<p>Your site will be re-skinned in the new style. Nothing else changes.</p>',
+          actions: [
+            { label: 'Cancel', className: 'button secondary', action: 'close' },
+            { label: 'Switch', className: 'button', action: 'confirm' }
+          ],
+          onConfirm: function () {
+            applyStyle(pendingStyleKey);
+            closeModal();
+            showToast('Style updated');
+          }
+        });
       });
       renderStyleOptions();
 
