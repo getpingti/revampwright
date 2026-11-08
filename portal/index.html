@@ -1,0 +1,917 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Client dashboard — RevampWright</title>
+  <style>
+    :root{
+      --blue:#1C74E8;--blue-dark:#1259BA;--cyan:#2EB5C8;--navy:#0A1A2E;--ink:#10233F;
+      --muted:#5F7288;--bg:#F2F7FB;--line:#DCE8F2;--line-dark:#C9D9E8;--green:#12805C;
+      --green-bg:#E7F6F0;--amber:#946200;--amber-bg:#FFF4D6;--red:#B42318;--red-bg:#FEF3F2;
+      --shadow:0 10px 30px rgba(10,26,46,.07);--shadow-lg:0 24px 60px rgba(10,26,46,.22);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;line-height:1.55}
+    a{color:var(--blue-dark)}
+    button,input,textarea{font:inherit}
+    button{cursor:pointer}
+    .demo-banner{background:var(--navy);color:#fff;text-align:center;padding:9px 18px;font-size:13.5px;font-weight:650}
+    .site-header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.97);border-bottom:1px solid var(--line);box-shadow:0 4px 18px rgba(10,26,46,.04)}
+    .header-inner{width:min(1440px,calc(100% - 40px));margin:0 auto;min-height:70px;display:flex;align-items:center;gap:18px}
+    .brand{text-decoration:none;color:var(--navy);font-size:23px;font-weight:850;letter-spacing:-.02em;white-space:nowrap}
+    .brand span{color:var(--blue)}
+    .brand small{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:750;line-height:1;margin-top:1px}
+    .header-right{margin-left:auto;display:flex;align-items:center;gap:14px}
+    .company-chip{display:flex;align-items:center;gap:10px;color:var(--navy);font-weight:700;font-size:14.5px}
+    .avatar{width:36px;height:36px;border-radius:50%;background:linear-gradient(145deg,var(--blue),var(--cyan));color:#fff;display:grid;place-items:center;font-size:13px;font-weight:850}
+    .logout{color:var(--muted);font-weight:650;text-decoration:none;border-left:1px solid var(--line);padding-left:14px}
+    .logout:hover{color:var(--blue-dark)}
+    .shell{width:min(1440px,calc(100% - 40px));margin:0 auto;padding:26px 0 52px;display:grid;grid-template-columns:248px minmax(0,1fr);gap:24px;align-items:start}
+    .sidebar{position:sticky;top:96px}
+    .side-card{background:#fff;border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow);padding:14px}
+    .side-label{font-size:12px;font-weight:800;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);padding:4px 10px 10px}
+    .nav-list{display:grid;gap:4px}
+    .nav-item{width:100%;border:0;background:transparent;color:var(--ink);text-align:left;border-radius:6px;padding:11px 12px;font-weight:650;display:flex;align-items:center;gap:11px}
+    .nav-item .nav-icon{width:26px;height:26px;border-radius:50%;background:#EDF4FA;color:var(--blue-dark);display:grid;place-items:center;font-size:13px;font-weight:850;flex:0 0 auto}
+    .nav-item:hover{background:#F4F9FD}
+    .nav-item.active{background:#EAF3FE;color:var(--blue-dark)}
+    .nav-item.active .nav-icon{background:var(--blue);color:#fff}
+    .side-note{margin-top:14px;background:#F7FBFF;border:1px solid var(--line);border-radius:7px;padding:14px;color:var(--muted);font-size:13.5px}
+    .side-note strong{color:var(--navy);display:block;margin-bottom:3px}
+    .dashboard{min-width:0}
+    .section{display:none;animation:fadeIn .18s ease-out}
+    .section.active{display:block}
+    @keyframes fadeIn{from{opacity:0;transform:translateY(3px)}to{opacity:1;transform:none}}
+    .section-head{margin:2px 0 20px;display:flex;justify-content:space-between;gap:20px;align-items:flex-end}
+    .section-head h1{font-size:31px;line-height:1.15;color:var(--navy);margin:0;letter-spacing:-.025em}
+    .section-head p{margin:7px 0 0;color:var(--muted);max-width:700px}
+    .grid-two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+    .grid-three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+    .card{background:#fff;border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow)}
+    .card-pad{padding:24px}
+    .card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:16px}
+    .card h2,.card h3{color:var(--navy);margin:0;line-height:1.25}
+    .card h2{font-size:21px}.card h3{font-size:18px}
+    .label{font-size:12px;font-weight:850;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:7px}
+    .muted{color:var(--muted)}
+    .small{font-size:13.5px}.tiny{font-size:12.5px}
+    .pill{display:inline-flex;align-items:center;gap:7px;border-radius:999px;padding:5px 10px;font-size:12.5px;font-weight:800;white-space:nowrap}
+    .pill.green{background:var(--green-bg);color:var(--green)}
+    .pill.blue{background:#EAF3FE;color:var(--blue-dark)}
+    .pill.amber{background:var(--amber-bg);color:var(--amber)}
+    .live-dot{width:9px;height:9px;border-radius:50%;background:#18A957;box-shadow:0 0 0 5px rgba(24,169,87,.13)}
+    .primary-url{font-size:23px;font-weight:850;color:var(--navy);letter-spacing:-.02em;word-break:break-word}
+    .meta-list{display:grid;gap:11px;margin:18px 0}
+    .meta-row{display:flex;justify-content:space-between;gap:18px;border-top:1px solid #EEF3F7;padding-top:11px;font-size:14.5px}
+    .meta-row span:first-child{color:var(--muted)}
+    .meta-row span:last-child{font-weight:650;text-align:right}
+    .button-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+    .button{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1.5px solid var(--blue);border-radius:6px;background:var(--blue);color:#fff;padding:10px 16px;font-weight:750;text-decoration:none;line-height:1.25;box-shadow:0 6px 14px rgba(28,116,232,.16)}
+    .button:hover{background:var(--blue-dark);border-color:var(--blue-dark);text-decoration:none}
+    .button.secondary{background:#fff;color:var(--navy);border-color:var(--line-dark);box-shadow:none}
+    .button.secondary:hover{border-color:var(--blue);color:var(--blue-dark)}
+    .button.danger-outline{background:#fff;color:var(--red);border-color:#E7B3AE;box-shadow:none}
+    .button.danger-outline:hover{background:var(--red-bg);border-color:var(--red)}
+    .button:disabled{opacity:.52;cursor:not-allowed;box-shadow:none}
+    .button.small{padding:8px 12px;font-size:14px}
+    .quick-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:20px}
+    .quick-action{text-align:left;background:#fff;border:1px solid var(--line);border-radius:8px;padding:20px;box-shadow:var(--shadow);color:var(--ink)}
+    .quick-action:hover{border-color:#A9C9EF;transform:translateY(-1px)}
+    .quick-action .qa-icon{width:38px;height:38px;border-radius:50%;background:#EAF3FE;color:var(--blue-dark);display:grid;place-items:center;font-weight:900;margin-bottom:12px}
+    .quick-action strong{display:block;color:var(--navy);font-size:16.5px;margin-bottom:4px}
+    .quick-action span{color:var(--muted);font-size:14px}
+    a.quick-action{text-decoration:none}
+    .notice{border:1px solid #BFD9F5;background:#F2F8FF;border-radius:7px;padding:15px 17px;color:#294664}
+    .notice strong{color:var(--navy)}
+    .notice.amber{border-color:#EBD28A;background:#FFFBEB;color:#5F4700}
+    .form-card{padding:26px}
+    .form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+    .field{min-width:0}.field.full{grid-column:1/-1}
+    label{display:block;font-weight:750;color:var(--navy);font-size:14.5px;margin-bottom:7px}
+    input,textarea{width:100%;border:1.5px solid #C9D9E8;border-radius:6px;padding:11px 12px;background:#fff;color:var(--ink);outline:none}
+    textarea{min-height:132px;resize:vertical}
+    input:focus,textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(28,116,232,.13)}
+    .field-help{font-size:13px;color:var(--muted);margin-top:6px}
+    .form-footer{margin-top:22px;padding-top:20px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:18px;align-items:center;flex-wrap:wrap}
+    .style-current{display:grid;grid-template-columns:230px 1fr;gap:24px;align-items:center}
+    .palette{display:grid;grid-template-columns:repeat(4,1fr);height:108px;border-radius:7px;overflow:hidden;border:1px solid rgba(10,26,46,.10)}
+    .palette span{display:block;height:100%}
+    .palette.small{height:72px}
+    .style-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:18px}
+    .style-card{display:flex;flex-direction:column}
+    .style-card .card-pad{display:flex;flex-direction:column;flex:1}
+    .style-card p{color:var(--muted);font-size:14.5px}
+    .style-card .button{margin-top:auto}
+    .quota{display:flex;justify-content:space-between;gap:16px;align-items:center;margin-top:18px}
+    .domain-list{display:grid;gap:12px}
+    .domain-row{display:flex;justify-content:space-between;gap:18px;align-items:center;border:1px solid var(--line);border-radius:7px;padding:16px;background:#FBFDFE}
+    .domain-row strong{color:var(--navy);word-break:break-word}
+    .domain-row p{margin:2px 0 0;color:var(--muted);font-size:14px}
+    .wizard{margin-top:20px}
+    .wizard-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-bottom:22px}
+    .wizard-step{position:relative;text-align:center;color:var(--muted);font-size:13.5px;font-weight:700}
+    .wizard-step::before{content:"";position:absolute;top:17px;left:0;right:0;height:2px;background:var(--line);z-index:0}
+    .wizard-step:first-child::before{left:50%}.wizard-step:last-child::before{right:50%}
+    .step-dot{position:relative;z-index:1;width:35px;height:35px;border-radius:50%;background:#fff;border:2px solid var(--line-dark);display:grid;place-items:center;margin:0 auto 7px;color:var(--muted);font-weight:850}
+    .wizard-step.active{color:var(--blue-dark)}
+    .wizard-step.active .step-dot{background:var(--blue);border-color:var(--blue);color:#fff}
+    .wizard-step.done{color:var(--green)}
+    .wizard-step.done .step-dot{background:var(--green-bg);border-color:var(--green);color:var(--green)}
+    .wizard-panel{display:none}.wizard-panel.active{display:block}
+    .table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:7px;background:#fff}
+    table{width:100%;border-collapse:collapse;min-width:650px}
+    th,td{text-align:left;padding:13px 15px;border-bottom:1px solid #EAF1F6;vertical-align:top;font-size:14.5px}
+    th{background:#F7FBFF;color:var(--navy);font-size:12.5px;letter-spacing:.06em;text-transform:uppercase}
+    tr:last-child td{border-bottom:0}
+    code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;background:#EEF4F8;border-radius:4px;padding:2px 5px;font-size:.92em}
+    .copy-note{min-height:118px;background:#F8FBFD}
+    .check-result{display:none;margin-top:16px}.check-result.show{display:block}
+    .action-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-top:18px}
+    .faq-list{display:grid;gap:12px}
+    details{background:#fff;border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow);padding:0;overflow:hidden}
+    summary{cursor:pointer;padding:18px 20px;font-weight:800;color:var(--navy);list-style:none;display:flex;justify-content:space-between;gap:16px;align-items:center}
+    summary::-webkit-details-marker{display:none}
+    summary::after{content:"+";font-size:22px;color:var(--blue);line-height:1}
+    details[open ] summary::after{content:"–"}
+    details .faq-body{padding:0 20px 19px;color:var(--muted);max-width:850px}
+    .contact-card{margin-top:18px;display:flex;justify-content:space-between;gap:18px;align-items:center}
+    .modal-overlay{position:fixed;inset:0;background:rgba(5,18,34,.58);z-index:100;display:none;align-items:center;justify-content:center;padding:20px}
+    .modal-overlay.open{display:flex}
+    .modal{background:#fff;border-radius:8px;box-shadow:var(--shadow-lg);width:min(560px,100%);max-height:calc(100vh - 40px);overflow:auto;padding:26px;position:relative}
+    .modal h2{margin:0 42px 10px 0;color:var(--navy);font-size:23px;line-height:1.25}
+    .modal p{color:var(--muted)}
+    .modal-close{position:absolute;right:16px;top:14px;width:36px;height:36px;border:0;border-radius:50%;background:#EDF4FA;color:var(--navy);font-size:22px;line-height:1}
+    .modal-actions{display:flex;justify-content:flex-end;gap:10px;flex-wrap:wrap;margin-top:22px}
+    .price-callout{background:#F2F8FF;border:1px solid #BFD9F5;border-radius:7px;padding:15px 17px;margin:16px 0;color:var(--navy)}
+    .price-callout strong{font-size:21px}
+    .toast{position:fixed;right:22px;bottom:22px;z-index:120;background:var(--navy);color:#fff;border-radius:7px;box-shadow:var(--shadow-lg);padding:14px 17px;max-width:min(420px,calc(100vw - 44px));opacity:0;transform:translateY(12px);pointer-events:none;transition:.22s}
+    .toast.show{opacity:1;transform:none}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    @media(max-width:1020px){
+      .shell{grid-template-columns:210px minmax(0,1fr)}
+      .style-grid,.quick-grid{grid-template-columns:1fr 1fr}
+      .style-grid .style-card:last-child{grid-column:1/-1}
+    }
+    @media(max-width:820px){
+      .shell{grid-template-columns:1fr;padding-top:16px}
+      .sidebar{position:static}
+      .side-card{padding:10px}
+      .side-label,.side-note{display:none}
+      .nav-list{display:flex;overflow-x:auto;padding-bottom:2px}
+      .nav-item{width:auto;white-space:nowrap;padding:9px 11px}
+      .nav-item .nav-icon{width:23px;height:23px;font-size:12px}
+      .grid-two,.grid-three,.form-grid,.action-grid{grid-template-columns:1fr}
+      .section-head{display:block}
+      .section-head h1{font-size:27px}
+      .style-current{grid-template-columns:1fr}
+      .header-inner,.shell{width:calc(100% - 28px)}
+      .company-chip span{display:none}
+      .brand{font-size:21px}
+      .logout{padding-left:0;border-left:0}
+    }
+    @media(max-width:560px){
+      .quick-grid,.style-grid{grid-template-columns:1fr}
+      .style-grid .style-card:last-child{grid-column:auto}
+      .card-pad,.form-card{padding:20px}
+      .domain-row,.quota,.contact-card{align-items:flex-start;flex-direction:column}
+      .meta-row{display:block}.meta-row span:last-child{text-align:left;display:block;margin-top:2px}
+      .wizard-step{font-size:12px}
+      .demo-banner{font-size:12.5px}
+      .modal{padding:22px 19px}
+      .modal-actions .button{flex:1}
+    }
+  </style>
+</head>
+<body>
+  <div class="demo-banner">Sample client dashboard — Aldercrest Custom Cabinets (fictional demo data). First-time sign-in code: SAMPLE-2026</div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html">Revamp<span>Wright</span><small>Client dashboard</small></a>
+      <div class="header-right">
+        <div class="company-chip"><span class="avatar" aria-hidden="true">AC</span><span>Aldercrest Custom Cabinets</span></div>
+        <a class="logout" href="login.html">Log out</a>
+      </div>
+    </div>
+  </header>
+
+  <div class="shell">
+    <aside class="sidebar" aria-label="Dashboard navigation">
+      <div class="side-card">
+        <div class="side-label">Manage your website</div>
+        <nav class="nav-list" aria-label="Dashboard sections">
+          <button class="nav-item active" type="button" data-target="overview" aria-current="page"><span class="nav-icon">⌂</span>Overview</button>
+          <button class="nav-item" type="button" data-target="content"><span class="nav-icon">✎</span>Site content</button>
+          <button class="nav-item" type="button" data-target="style"><span class="nav-icon">◐</span>Style</button>
+          <button class="nav-item" type="button" data-target="domain"><span class="nav-icon">◎</span>Domain</button>
+          <button class="nav-item" type="button" data-target="billing"><span class="nav-icon">$</span>Billing</button>
+          <button class="nav-item" type="button" data-target="help"><span class="nav-icon">?</span>Help</button>
+        </nav>
+        <div class="side-note"><strong>Need a hand?</strong>Most everyday changes are self-service here. For included content updates, email us and we’ll take care of it.</div>
+      </div>
+    </aside>
+
+    <main class="dashboard">
+      <section class="section active" id="section-overview" data-section="overview" aria-labelledby="overview-title">
+        <div class="section-head">
+          <div>
+            <h1 id="overview-title">Good to see you, Aldercrest.</h1>
+            <p>Your redesigned website is live. This page keeps the essentials in view without turning simple changes into a project.</p>
+          </div>
+          <span class="pill green"><span class="live-dot" aria-hidden="true"></span> Website live</span>
+        </div>
+
+        <div class="grid-two">
+          <article class="card card-pad">
+            <div class="card-head">
+              <div>
+                <div class="label">Website status</div>
+                <h2>Live and reachable</h2>
+              </div>
+              <span class="pill green"><span class="live-dot" aria-hidden="true"></span> LIVE</span>
+            </div>
+            <div class="primary-url">aldercrestcabinets.cc</div>
+            <p class="muted" style="margin:7px 0 0">Your primary web address</p>
+            <div class="meta-list">
+              <div class="meta-row"><span>Also reachable at</span><span>aldercrest.revampwright.com</span></div>
+              <div class="meta-row"><span>Activated</span><span>Nov 8, 2026</span></div>
+              <div class="meta-row"><span>Current style</span><span id="overview-style">Cozy Warm</span></div>
+            </div>
+            <div class="button-row">
+              <a class="button" href="/demo/">View my website</a>
+              <button class="button secondary" type="button" data-open-section="domain">Manage domain</button>
+            </div>
+          </article>
+
+          <article class="card card-pad" id="plan-card">
+            <div class="card-head">
+              <div>
+                <div class="label">Hosting &amp; care</div>
+                <h2>Care Plan</h2>
+              </div>
+              <span class="pill blue" id="plan-status">Active</span>
+            </div>
+            <p style="font-size:19px;color:var(--navy);margin:0 0 6px"><strong>Included free until Nov 7, 2027</strong></p>
+            <p class="muted" style="margin:0"><span id="days-remaining">364 days remaining</span> in the included first year.</p>
+            <div class="meta-list">
+              <div class="meta-row"><span>After the included year</span><span>$299/year</span></div>
+              <div class="meta-row"><span>Auto-renew date</span><span id="renew-date">Nov 8, 2027</span></div>
+              <div class="meta-row"><span>Auto-renew</span><span id="renew-state">On</span></div>
+            </div>
+            <div id="renew-on-actions">
+              <div class="button-row">
+                <button class="button secondary" type="button" data-open-section="billing">View billing</button>
+                <button class="button danger-outline" type="button" id="cancel-renew-button">Cancel auto-renew</button>
+              </div>
+            </div>
+            <div class="notice amber" id="renew-off-message" hidden>
+              <strong>Auto-renew off</strong> — your site stays live until Nov 7, 2027, then enters a 10-month grace period.
+            </div>
+          </article>
+        </div>
+
+        <div class="quick-grid" aria-label="Quick actions">
+          <button class="quick-action" type="button" data-open-section="content">
+            <span class="qa-icon">✎</span>
+            <strong>Edit contact info</strong>
+            <span>Phone, email, address, hours and your company intro.</span>
+          </button>
+          <button class="quick-action" type="button" data-open-section="style">
+            <span class="qa-icon">◐</span>
+            <strong>Change style</strong>
+            <span>Use your yearly free style change or preview another look.</span>
+          </button>
+          <a class="quick-action" href="/demo/">
+            <span class="qa-icon">↗</span>
+            <strong>View my website</strong>
+            <span>Open the live Aldercrest sample site in a new view.</span>
+          </a>
+        </div>
+      </section>
+
+      <section class="section" id="section-content" data-section="content" aria-labelledby="content-title">
+        <div class="section-head">
+          <div>
+            <h1 id="content-title">Site content</h1>
+            <p>Keep the information customers rely on up to date. These are the details your website uses everywhere.</p>
+          </div>
+        </div>
+
+        <form class="card form-card" id="content-form">
+          <div class="card-head">
+            <div>
+              <div class="label">Self-service editing</div>
+              <h2>Business details</h2>
+            </div>
+            <span class="pill blue">Applies site-wide</span>
+          </div>
+
+          <div class="form-grid">
+            <div class="field">
+              <label for="phone">Phone</label>
+              <input id="phone" name="phone" type="tel" value="(217) 555-0147" autocomplete="tel">
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" value="hello@revampwright.com" autocomplete="email">
+            </div>
+            <div class="field">
+              <label for="street-address">Street address</label>
+              <input id="street-address" name="street-address" value="1420 Industrial Parkway" autocomplete="street-address">
+            </div>
+            <div class="field">
+              <label for="city-state-zip">City, state &amp; ZIP</label>
+              <input id="city-state-zip" name="city-state-zip" value="Springfield, IL 62703" autocomplete="address-level2">
+            </div>
+            <div class="field full">
+              <label for="hours">Business hours</label>
+              <input id="hours" name="hours" value="Mon–Fri 8:00 AM – 5:00 PM, Sat by appointment">
+              <div class="field-help">Shown in your header, contact page and footer.</div>
+            </div>
+            <div class="field full">
+              <label for="intro">Company intro</label>
+              <textarea id="intro" name="intro">Family-run custom cabinet shop in Springfield, Illinois. Dale Mercer founded Aldercrest in 1998; today our crew of eleven designs, builds and installs kitchens, mudrooms and built-ins across central Illinois.</textarea>
+              <div class="field-help">Used in your About section and other introductory text blocks.</div>
+            </div>
+          </div>
+
+          <div class="form-footer">
+            <div>
+              <div class="notice" style="border:0;padding:0;background:transparent"><strong>Changes apply across your whole website instantly.</strong></div>
+              <p class="muted small" style="margin:5px 0 0">For other content changes, your care plan includes two small content updates a year — email us and we’ll take care of it.</p>
+            </div>
+            <button class="button" type="submit">Save changes</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="section" id="section-style" data-section="style" aria-labelledby="style-title">
+        <div class="section-head">
+          <div>
+            <h1 id="style-title">Design style</h1>
+            <p>Change the look without changing your content. Your pages, words, photos and web address stay exactly the same.</p>
+          </div>
+        </div>
+
+        <article class="card card-pad">
+          <div class="style-current">
+            <div class="palette" id="current-palette" aria-label="Current style color palette">
+              <span style="background:#D79D6C"></span><span style="background:#F5F0E8"></span><span style="background:#6B4A2F"></span><span style="background:#343434"></span>
+            </div>
+            <div>
+              <div class="label">Current style</div>
+              <h2 id="current-style-name">Cozy Warm</h2>
+              <p class="muted" id="current-style-description" style="margin:8px 0 0">Camel, cream and deep wood tones with a crafted, welcoming feel.</p>
+              <div class="button-row" style="margin-top:16px">
+                <span class="pill green">Currently live</span>
+                <button class="button secondary" type="button" data-open-section="overview">Back to overview</button>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <div class="notice quota" id="style-quota" role="status">
+          <span><strong>Style-change allowance:</strong> Your care plan includes 1 free style change each year. You have <strong id="free-style-count">1 remaining</strong>.</span>
+          <span class="pill blue">No content changes</span>
+        </div>
+
+        <div class="style-grid" id="style-options" aria-label="Alternative design styles"></div>
+      </section>
+
+      <section class="section" id="section-domain" data-section="domain" aria-labelledby="domain-title">
+        <div class="section-head">
+          <div>
+            <h1 id="domain-title">Domain</h1>
+            <p>See which addresses point to your website and connect a domain you already own when you’re ready.</p>
+          </div>
+        </div>
+
+        <article class="card card-pad">
+          <div class="card-head">
+            <div>
+              <div class="label">Current domains</div>
+              <h2>Connected addresses</h2>
+            </div>
+            <span class="pill green">All active</span>
+          </div>
+          <div class="domain-list">
+            <div class="domain-row">
+              <div>
+                <strong>aldercrestcabinets.cc</strong>
+                <p>Gift domain · Renews with your care plan</p>
+              </div>
+              <span class="pill blue">Primary · Connected</span>
+            </div>
+            <div class="domain-row">
+              <div>
+                <strong>aldercrest.revampwright.com</strong>
+                <p>System address · Always points to your live website</p>
+              </div>
+              <span class="pill green">Active</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="card card-pad wizard" aria-labelledby="wizard-title">
+          <div class="card-head">
+            <div>
+              <div class="label">Self-service wizard</div>
+              <h2 id="wizard-title">Connect your own domain</h2>
+            </div>
+            <span class="pill blue">About 5 minutes</span>
+          </div>
+
+          <div class="wizard-steps" aria-label="Domain connection progress">
+            <div class="wizard-step active" data-wizard-label="1"><span class="step-dot">1</span>Enter domain</div>
+            <div class="wizard-step" data-wizard-label="2"><span class="step-dot">2</span>Update DNS</div>
+            <div class="wizard-step" data-wizard-label="3"><span class="step-dot">3</span>We verify it</div>
+          </div>
+
+          <div class="wizard-panel active" data-wizard-panel="1">
+            <div class="field">
+              <label for="custom-domain">Your domain</label>
+              <input id="custom-domain" type="text" inputmode="url" placeholder="e.g. aldercrestcabinets.com" autocomplete="url">
+              <div class="field-help" id="domain-error" role="alert"></div>
+            </div>
+            <p class="muted">Use a domain you already own. Connecting it does not move your email or change where the domain is registered.</p>
+            <div class="button-row" style="margin-top:18px">
+              <button class="button" type="button" id="domain-continue">Continue</button>
+            </div>
+          </div>
+
+          <div class="wizard-panel" data-wizard-panel="2">
+            <h3 style="margin-top:0">Add these two DNS records</h3>
+            <p class="muted">For <strong id="wizard-domain-name">yourdomain.com</strong>, sign in wherever its DNS is managed and add:</p>
+            <div class="table-wrap">
+              <table aria-label="Required DNS records">
+                <thead><tr><th>Type</th><th>Host</th><th>Points to / value</th></tr></thead>
+                <tbody>
+                  <tr><td><code>CNAME</code></td><td><code>www</code></td><td><code>aldercrest.revampwright.com</code></td></tr>
+                  <tr><td><code>A</code></td><td><code>@</code></td><td><code>192.0.2.10</code></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p class="small muted">Demo values are shown here. In the live dashboard, use the exact values shown for your account.</p>
+
+            <div class="field" style="margin-top:20px">
+              <label for="provider-note">Message you can send your old provider</label>
+              <textarea class="copy-note" id="provider-note" readonly>Hello, please update the DNS records for my domain. Add a CNAME record for “www” pointing to aldercrest.revampwright.com, and an A record for “@” pointing to 192.0.2.10. Please leave my email records unchanged. Thank you.</textarea>
+            </div>
+            <div class="button-row" style="margin-top:16px">
+              <button class="button secondary" type="button" id="copy-provider-note">Copy message</button>
+              <button class="button secondary" type="button" data-wizard-back="1">Back</button>
+              <button class="button" type="button" id="dns-done">I’ve added the records</button>
+            </div>
+          </div>
+
+          <div class="wizard-panel" data-wizard-panel="3">
+            <div style="text-align:center;padding:12px 0 4px">
+              <div class="avatar" style="width:54px;height:54px;margin:0 auto 14px;font-size:22px" aria-hidden="true">◎</div>
+              <h3>We’re watching for the change</h3>
+              <p class="muted" style="max-width:560px;margin:8px auto 0">We check automatically every few minutes. When the records appear, we’ll connect the domain and secure it automatically.</p>
+            </div>
+            <div class="notice check-result" id="domain-check-result" role="status">
+              <strong>Not detected yet — DNS can take a while.</strong><br>
+              Please check again in a few minutes. Some providers take a few hours to publish changes.
+            </div>
+            <div class="button-row" style="justify-content:center;margin-top:20px">
+              <button class="button secondary" type="button" data-wizard-back="2">Back to records</button>
+              <button class="button" type="button" id="check-domain">Check now</button>
+              <button class="button secondary" type="button" id="restart-wizard">Start over</button>
+            </div>
+          </div>
+
+          <div class="notice" style="margin-top:22px">
+            <strong>You stay in control of your old account.</strong> RevampWright never contacts your old provider for you. The copyable message above lets you ask them for exactly what is needed.
+          </div>
+        </article>
+      </section>
+
+      <section class="section" id="section-billing" data-section="billing" aria-labelledby="billing-title">
+        <div class="section-head">
+          <div>
+            <h1 id="billing-title">Billing</h1>
+            <p>Your order, care plan and account requests — no surprise charges and no phone call required.</p>
+          </div>
+        </div>
+
+        <article class="card card-pad">
+          <div class="card-head">
+            <div>
+              <div class="label">Order history</div>
+              <h2>Payments &amp; plan</h2>
+            </div>
+            <span class="pill green">Account in good standing</span>
+          </div>
+          <div class="table-wrap">
+            <table aria-label="Orders and care plan">
+              <thead>
+                <tr><th>Invoice</th><th>Item</th><th>Date / period</th><th>Amount</th><th>Status</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>#RW-2026-0001</strong></td>
+                  <td>Website Redesign</td>
+                  <td>Nov 8, 2026</td>
+                  <td><strong>$499</strong></td>
+                  <td><span class="pill green">Paid</span></td>
+                </tr>
+                <tr>
+                  <td>—</td>
+                  <td>Care Plan</td>
+                  <td>Free until Nov 7, 2027; then renews yearly</td>
+                  <td><strong>$0 now</strong><br><span class="muted">then $299/year</span></td>
+                  <td><span class="pill blue" id="billing-plan-status">Active</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="muted small" style="margin:14px 0 0">We email a reminder 30 days before the first $299 renewal charge. You can cancel auto-renew from the Overview tab at any time.</p>
+        </article>
+
+        <div class="action-grid">
+          <article class="card card-pad">
+            <div class="label">Refunds</div>
+            <h3>Request a refund</h3>
+            <p class="muted">Our 7-day policy is shown before you send a request, so there are no surprises.</p>
+            <button class="button secondary" type="button" id="refund-button">Request a refund</button>
+          </article>
+
+          <article class="card card-pad">
+            <div class="label">Your files</div>
+            <h3>Download my website files</h3>
+            <p class="muted">Your finished website files are available by application after an initial protection period.</p>
+            <button class="button secondary" type="button" id="download-button">About file downloads</button>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="section-help" data-section="help" aria-labelledby="help-title">
+        <div class="section-head">
+          <div>
+            <h1 id="help-title">Help</h1>
+            <p>Short answers to the things clients ask most. If you still need us, email is fastest.</p>
+          </div>
+        </div>
+
+        <div class="faq-list">
+          <details>
+            <summary>How do I change my contact information?</summary>
+            <div class="faq-body">Open the <strong>Site content</strong> tab. You can update your phone number, email, address, business hours and company intro yourself. Save once and the change applies across your whole website.</div>
+          </details>
+          <details>
+            <summary>How do style changes work?</summary>
+            <div class="faq-body">Open the <strong>Style</strong> tab and choose another design. Your care plan includes one free style change each year; additional changes are $100 each and the price is shown before you confirm. A style change only replaces the design skin — your content, pages and web address stay the same.</div>
+          </details>
+          <details>
+            <summary>How do I connect my old domain?</summary>
+            <div class="faq-body">Use the step-by-step wizard in the <strong>Domain</strong> tab. It shows the two DNS records to add and gives you a message you can send to your old provider. We never contact your old provider for you, so you stay in control of that account.</div>
+          </details>
+          <details>
+            <summary>How do I cancel the care plan?</summary>
+            <div class="faq-body">In <strong>Overview</strong>, choose “Cancel auto-renew.” Your website stays live until the end of the paid or included period. After that, it enters a 10-month grace period during which you can log in and renew before anything is removed.</div>
+          </details>
+          <details>
+            <summary>How do refunds work?</summary>
+            <div class="faq-body">You have 7 days from purchase. Before activation, the refund is the full $499. After activation, it is $479 because a $20 domain &amp; setup fee is non-refundable. You can start a request from the <strong>Billing</strong> tab.</div>
+          </details>
+        </div>
+
+        <article class="card card-pad contact-card">
+          <div>
+            <div class="label">Still need help?</div>
+            <h3>Email RevampWright</h3>
+            <p class="muted" style="margin:5px 0 0">We reply within one business day.</p>
+          </div>
+          <a class="button" href="mailto:hello@revampwright.com">hello@revampwright.com</a>
+        </article>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal-overlay" id="modal-overlay" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <button class="modal-close" type="button" id="modal-close" aria-label="Close dialog">×</button>
+      <h2 id="modal-title">Dialog</h2>
+      <div id="modal-body"></div>
+      <div class="modal-actions" id="modal-actions"></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      var navItems = Array.prototype.slice.call(document.querySelectorAll('.nav-item'));
+      var sections = Array.prototype.slice.call(document.querySelectorAll('.section'));
+      var toast = document.getElementById('toast');
+      var toastTimer = null;
+
+      function showToast(message) {
+        toast.textContent = message;
+        toast.classList.add('show');
+        window.clearTimeout(toastTimer);
+        toastTimer = window.setTimeout(function () { toast.classList.remove('show'); }, 3600);
+      }
+
+      function showSection(target) {
+        navItems.forEach(function (item) {
+          var active = item.getAttribute('data-target') === target;
+          item.classList.toggle('active', active);
+          if (active) item.setAttribute('aria-current', 'page'); else item.removeAttribute('aria-current');
+        });
+        sections.forEach(function (section) {
+          section.classList.toggle('active', section.getAttribute('data-section') === target);
+        });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      navItems.forEach(function (item) {
+        item.addEventListener('click', function () { showSection(item.getAttribute('data-target')); });
+      });
+      document.querySelectorAll('[data-open-section]').forEach(function (button) {
+        button.addEventListener('click', function () { showSection(button.getAttribute('data-open-section')); });
+      });
+
+      var includedStart = Date.UTC(2026, 10, 8);
+      var includedEnd = Date.UTC(2027, 10, 7);
+      var daysRemaining = Math.round((includedEnd - includedStart) / 86400000);
+      document.getElementById('days-remaining').textContent = daysRemaining + ' days remaining';
+
+      var overlay = document.getElementById('modal-overlay');
+      var modalTitle = document.getElementById('modal-title');
+      var modalBody = document.getElementById('modal-body');
+      var modalActions = document.getElementById('modal-actions');
+      var modalClose = document.getElementById('modal-close');
+      var modalConfirmHandler = null;
+
+      function closeModal() {
+        overlay.classList.remove('open');
+        overlay.setAttribute('aria-hidden', 'true');
+        modalConfirmHandler = null;
+      }
+
+      function openModal(options) {
+        modalTitle.textContent = options.title;
+        modalBody.innerHTML = options.body || '';
+        modalActions.innerHTML = '';
+        modalConfirmHandler = options.onConfirm || null;
+
+        (options.actions || [{ label: 'Close', className: 'button secondary', action: 'close' }]).forEach(function (action) {
+          var button = document.createElement('button');
+          button.type = 'button';
+          button.className = action.className || 'button';
+          button.textContent = action.label;
+          if (action.disabled) button.disabled = true;
+          button.addEventListener('click', function () {
+            if (action.action === 'confirm' && modalConfirmHandler) modalConfirmHandler();
+            else closeModal();
+          });
+          modalActions.appendChild(button);
+        });
+
+        overlay.classList.add('open');
+        overlay.setAttribute('aria-hidden', 'false');
+        modalClose.focus();
+      }
+
+      modalClose.addEventListener('click', closeModal);
+      overlay.addEventListener('click', function (event) { if (event.target === overlay) closeModal(); });
+      document.addEventListener('keydown', function (event) { if (event.key === 'Escape' && overlay.classList.contains('open')) closeModal(); });
+
+      var autoRenew = true;
+      document.getElementById('cancel-renew-button').addEventListener('click', function () {
+        if (!autoRenew) return;
+        openModal({
+          title: 'Cancel auto-renew?',
+          body: '<p>Your website and care plan will stay active through <strong>Nov 7, 2027</strong>. After that date, the site will enter a 10-month grace period instead of renewing at $299/year.</p><p>You can turn auto-renew back on before the period ends.</p>',
+          actions: [
+            { label: 'Keep auto-renew', className: 'button secondary', action: 'close' },
+            { label: 'Confirm cancellation', className: 'button danger-outline', action: 'confirm' }
+          ],
+          onConfirm: function () {
+            autoRenew = false;
+            document.getElementById('renew-state').textContent = 'Off';
+            document.getElementById('renew-date').textContent = 'No renewal scheduled';
+            document.getElementById('plan-status').textContent = 'Active · Auto-renew off';
+            document.getElementById('plan-status').className = 'pill amber';
+            document.getElementById('billing-plan-status').textContent = 'Active · Auto-renew off';
+            document.getElementById('renew-on-actions').hidden = true;
+            document.getElementById('renew-off-message').hidden = false;
+            closeModal();
+            showToast('Auto-renew cancelled. Your site stays live until Nov 7, 2027.');
+          }
+        });
+      });
+
+      document.getElementById('content-form').addEventListener('submit', function (event) {
+        event.preventDefault();
+        showToast('Saved — your website has been updated.');
+      });
+
+      var styleCatalog = {
+        cozy: {
+          name: 'Cozy Warm',
+          description: 'Camel, cream and deep wood tones with a crafted, welcoming feel.',
+          colors: ['#D79D6C', '#F5F0E8', '#6B4A2F', '#343434']
+        },
+        modern: {
+          name: 'Modern Cool',
+          description: 'Blue-grey, crisp and precise — a calm, contemporary workshop feel.',
+          colors: ['#5B7C99', '#DCE8F0', '#2F4858', '#8FB8C8']
+        },
+        teckno: {
+          name: 'Teckno Bright',
+          description: 'Bright blue and cyan with a clean, energetic technology feel.',
+          colors: ['#1C74E8', '#2EB5C8', '#0A1A2E', '#EAF4FF']
+        },
+        harbor: {
+          name: 'Harbor Navy',
+          description: 'Deep navy and coral softened with warm, practical neutrals.',
+          colors: ['#0F1D3A', '#FF4A2E', '#F4EDE6', '#517A8A']
+        }
+      };
+      var currentStyleKey = 'cozy';
+      var freeStyleChanges = 1;
+      var pendingStyleKey = null;
+      var styleOptions = document.getElementById('style-options');
+      var freeStyleCount = document.getElementById('free-style-count');
+
+      function paletteHTML(colors, className) {
+        return '<div class="palette ' + (className || '') + '" aria-hidden="true">' + colors.map(function (color) {
+          return '<span style="background:' + color + '"></span>';
+        }).join('') + '</div>';
+      }
+
+      function renderStyleOptions() {
+        styleOptions.innerHTML = Object.keys(styleCatalog).filter(function (key) {
+          return key !== currentStyleKey;
+        }).map(function (key) {
+          var style = styleCatalog[key];
+          return '<article class="card style-card"><div class="card-pad">' +
+            paletteHTML(style.colors, 'small') +
+            '<h3 style="margin-top:17px">' + style.name + '</h3>' +
+            '<p>' + style.description + '</p>' +
+            '<button class="button secondary" type="button" data-switch-style="' + key + '">Switch to this style</button>' +
+            '</div></article>';
+        }).join('');
+        freeStyleCount.textContent = freeStyleChanges + ' remaining';
+      }
+
+      function applyStyle(key) {
+        currentStyleKey = key;
+        var style = styleCatalog[key];
+        document.getElementById('current-style-name').textContent = style.name;
+        document.getElementById('current-style-description').textContent = style.description;
+        document.getElementById('current-palette').innerHTML = style.colors.map(function (color) {
+          return '<span style="background:' + color + '"></span>';
+        }).join('');
+        document.getElementById('overview-style').textContent = style.name;
+        renderStyleOptions();
+      }
+
+      styleOptions.addEventListener('click', function (event) {
+        var button = event.target.closest('[data-switch-style]');
+        if (!button) return;
+        pendingStyleKey = button.getAttribute('data-switch-style');
+        var style = styleCatalog[pendingStyleKey];
+
+        if (freeStyleChanges > 0) {
+          openModal({
+            title: 'Switch to ' + style.name + '?',
+            body: '<p>Your site will be re-skinned with <strong>' + style.name + '</strong>. Your content, pages and web address stay exactly the same.</p><p>This will use your 1 free style change for this plan year.</p>',
+            actions: [
+              { label: 'Not yet', className: 'button secondary', action: 'close' },
+              { label: 'Switch style', className: 'button', action: 'confirm' }
+            ],
+            onConfirm: function () {
+              freeStyleChanges = 0;
+              applyStyle(pendingStyleKey);
+              closeModal();
+              showToast('Style updated');
+            }
+          });
+        } else {
+          openModal({
+            title: 'Switch to ' + style.name + '?',
+            body: '<p>Your free style change for this plan year has been used.</p><div class="price-callout"><strong>$100</strong> per additional style change</div><p>Your content, pages and web address stay exactly the same. <strong>Demo only — no payment is taken.</strong></p>',
+            actions: [
+              { label: 'Cancel', className: 'button secondary', action: 'close' },
+              { label: 'Pay $100 & switch', className: 'button', action: 'confirm' }
+            ],
+            onConfirm: function () {
+              applyStyle(pendingStyleKey);
+              closeModal();
+              showToast('Style updated');
+            }
+          });
+        }
+      });
+      renderStyleOptions();
+
+      var wizardPanels = Array.prototype.slice.call(document.querySelectorAll('[data-wizard-panel]'));
+      var wizardSteps = Array.prototype.slice.call(document.querySelectorAll('[data-wizard-label]'));
+      var domainInput = document.getElementById('custom-domain');
+      var domainError = document.getElementById('domain-error');
+      var providerNote = document.getElementById('provider-note');
+      var checkResult = document.getElementById('domain-check-result');
+
+      function setWizardStep(step) {
+        wizardPanels.forEach(function (panel) {
+          panel.classList.toggle('active', Number(panel.getAttribute('data-wizard-panel')) === step);
+        });
+        wizardSteps.forEach(function (item, index) {
+          var number = index + 1;
+          item.classList.toggle('active', number === step);
+          item.classList.toggle('done', number < step);
+          item.querySelector('.step-dot').textContent = number < step ? '✓' : String(number);
+        });
+      }
+
+      document.getElementById('domain-continue').addEventListener('click', function () {
+        var domain = domainInput.value.trim().toLowerCase();
+        var valid = /^[a-z0-9-]+(\.[a-z0-9-]+)+$/.test(domain) && domain.indexOf(' ') === -1;
+        if (!valid) {
+          domainError.textContent = 'Please enter a complete domain, such as aldercrestcabinets.com.';
+          domainError.style.color = 'var(--red)';
+          domainInput.focus();
+          return;
+        }
+        domainError.textContent = '';
+        document.getElementById('wizard-domain-name').textContent = domain;
+        providerNote.value = 'Hello, please update the DNS records for ' + domain + '. Add a CNAME record for “www” pointing to aldercrest.revampwright.com, and an A record for “@” pointing to 192.0.2.10. Please leave my email records unchanged. Thank you.';
+        setWizardStep(2);
+      });
+
+      document.querySelectorAll('[data-wizard-back]').forEach(function (button) {
+        button.addEventListener('click', function () { setWizardStep(Number(button.getAttribute('data-wizard-back'))); });
+      });
+      document.getElementById('dns-done').addEventListener('click', function () {
+        checkResult.classList.remove('show');
+        setWizardStep(3);
+      });
+      document.getElementById('restart-wizard').addEventListener('click', function () {
+        domainInput.value = '';
+        checkResult.classList.remove('show');
+        setWizardStep(1);
+        domainInput.focus();
+      });
+      document.getElementById('check-domain').addEventListener('click', function () {
+        var button = this;
+        button.disabled = true;
+        button.textContent = 'Checking…';
+        window.setTimeout(function () {
+          button.disabled = false;
+          button.textContent = 'Check now';
+          checkResult.classList.add('show');
+        }, 650);
+      });
+      document.getElementById('copy-provider-note').addEventListener('click', function () {
+        function copied() { showToast('Message copied — you can paste it into an email to your provider.'); }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(providerNote.value).then(copied).catch(function () {
+            providerNote.select();
+            document.execCommand('copy');
+            copied();
+          });
+        } else {
+          providerNote.select();
+          document.execCommand('copy');
+          copied();
+        }
+      });
+
+      document.getElementById('refund-button').addEventListener('click', function () {
+        openModal({
+          title: 'Request a refund',
+          body: '<p>Within 7 days of purchase: full refund before activation, $479 after activation ($20 domain &amp; setup fee).</p><p>For this sample order, the request would be reviewed under that policy.</p>',
+          actions: [
+            { label: 'Cancel', className: 'button secondary', action: 'close' },
+            { label: 'Send refund request', className: 'button', action: 'confirm' }
+          ],
+          onConfirm: function () {
+            closeModal();
+            showToast('Refund request sent');
+          }
+        });
+      });
+
+      document.getElementById('download-button').addEventListener('click', function () {
+        openModal({
+          title: 'Download my website files',
+          body: '<p>Your finished website files are available by application. Applications open 3 months after activation, so this account can apply from <strong>Feb 8, 2027</strong>.</p><p>Once approved, the download link will appear here in your dashboard.</p>',
+          actions: [
+            { label: 'Applications open Feb 8, 2027', className: 'button', action: 'close', disabled: true },
+            { label: 'Close', className: 'button secondary', action: 'close' }
+          ]
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
