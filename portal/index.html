@@ -96,6 +96,20 @@
     input:focus,textarea:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(28,116,232,.13)}
     .field-help{font-size:13px;color:var(--muted);margin-top:6px}
     .form-footer{margin-top:22px;padding-top:20px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:18px;align-items:center;flex-wrap:wrap}
+    select{width:100%;border:1.5px solid #C9D9E8;border-radius:6px;padding:11px 12px;background:#fff;color:var(--ink);outline:none;font:inherit}
+    select:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(28,116,232,.13)}
+    .contact-group{border:1px solid var(--line);border-radius:7px;background:#FBFDFE;padding:16px;margin-bottom:14px}
+    .group-head{display:flex;gap:12px;align-items:flex-end;margin-bottom:12px}
+    .group-head .field{flex:1}
+    .item-row{display:flex;gap:8px;align-items:center;margin-bottom:8px}
+    .item-row input,.item-row select{min-width:0}
+    .item-row .item-type{flex:0 0 126px}
+    .item-row .item-label{flex:1 1 110px}
+    .item-row .item-value{flex:1.7 1 150px}
+    .row-button{flex:0 0 auto;width:36px;height:43px;border:1.5px solid var(--line-dark);border-radius:6px;background:#fff;color:var(--muted);font-weight:800;line-height:1;padding:0}
+    .row-button:hover{border-color:var(--blue);color:var(--blue-dark)}
+    .row-button:disabled{opacity:.38;cursor:not-allowed}
+    .row-button:disabled:hover{border-color:var(--line-dark);color:var(--muted)}
     .style-current{display:grid;grid-template-columns:230px 1fr;gap:24px;align-items:center}
     .palette{display:grid;grid-template-columns:repeat(4,1fr);height:108px;border-radius:7px;overflow:hidden;border:1px solid rgba(10,26,46,.10)}
     .palette span{display:block;height:100%}
@@ -309,26 +323,11 @@
           </div>
 
           <div class="form-grid">
-            <div class="field">
-              <label for="phone">Phone</label>
-              <input id="phone" name="phone" type="tel" value="(217) 555-0147" autocomplete="tel">
-            </div>
-            <div class="field">
-              <label for="email">Email</label>
-              <input id="email" name="email" type="email" value="hello@revampwright.com" autocomplete="email">
-            </div>
-            <div class="field">
-              <label for="street-address">Street address</label>
-              <input id="street-address" name="street-address" value="1420 Industrial Parkway" autocomplete="street-address">
-            </div>
-            <div class="field">
-              <label for="city-state-zip">City, state &amp; ZIP</label>
-              <input id="city-state-zip" name="city-state-zip" value="Springfield, IL 62703" autocomplete="address-level2">
-            </div>
             <div class="field full">
-              <label for="hours">Business hours</label>
-              <input id="hours" name="hours" value="Mon–Fri 8:00 AM – 5:00 PM, Sat by appointment">
-              <div class="field-help">Shown in your header, contact page and footer.</div>
+              <label>Contact details</label>
+              <p class="field-help" style="margin-top:0">Add, remove and reorder your contact details freely. Your site's header and call button always use your first phone number; your footer and contact page list everything by group.</p>
+              <div id="contact-groups" style="margin-top:14px"></div>
+              <button class="button secondary small" type="button" id="add-group-button">+ Add group</button>
             </div>
             <div class="field full">
               <label for="intro">Company intro</label>
@@ -711,6 +710,103 @@
         event.preventDefault();
         showToast('Saved — your website has been updated.');
       });
+
+      var CONTACT_TYPES = ['Phone', 'Mobile', 'Fax', 'Email', 'WhatsApp', 'WeChat', 'Address', 'Hours', 'Website'];
+      var MAX_GROUPS = 5;
+      var MAX_ITEMS_PER_GROUP = 10;
+      var LIMIT_MESSAGE = 'Limit reached — up to 5 groups and 10 items per group.';
+      var contactGroups = [
+        { name: '', items: [
+          { type: 'Phone', label: '', value: '(217) 555-0147' },
+          { type: 'Fax', label: '', value: '(217) 555-0148' },
+          { type: 'Email', label: '', value: 'hello@revampwright.com' },
+          { type: 'Address', label: '', value: '1420 Industrial Parkway, Springfield, IL 62703' },
+          { type: 'Hours', label: '', value: 'Mon–Fri 8:00 AM – 5:00 PM' }
+        ] },
+        { name: 'Design Studio', items: [
+          { type: 'Phone', label: 'Consultations', value: '(217) 555-0126' },
+          { type: 'Email', label: 'Design inquiries', value: 'hello@revampwright.com' },
+          { type: 'Hours', label: '', value: 'Sat by appointment' }
+        ] }
+      ];
+      var contactGroupsEl = document.getElementById('contact-groups');
+
+      function escapeHTML(text) {
+        return String(text).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+      }
+
+      function typeOptions(selected) {
+        return CONTACT_TYPES.map(function (type) {
+          return '<option value="' + type + '"' + (type === selected ? ' selected' : '') + '>' + type + '</option>';
+        }).join('');
+      }
+
+      function renderContactGroups() {
+        contactGroupsEl.innerHTML = contactGroups.map(function (group, gi) {
+          var rows = group.items.map(function (item, ii) {
+            return '<div class="item-row">' +
+              '<select class="item-type" data-g="' + gi + '" data-i="' + ii + '" data-field="type" aria-label="Contact type">' + typeOptions(item.type) + '</select>' +
+              '<input class="item-label" data-g="' + gi + '" data-i="' + ii + '" data-field="label" placeholder="Label (optional)" value="' + escapeHTML(item.label) + '" aria-label="Label (optional)">' +
+              '<input class="item-value" data-g="' + gi + '" data-i="' + ii + '" data-field="value" placeholder="Value" value="' + escapeHTML(item.value) + '" aria-label="Value">' +
+              '<button class="row-button" type="button" data-action="up" data-g="' + gi + '" data-i="' + ii + '"' + (ii === 0 ? ' disabled' : '') + ' aria-label="Move item up">↑</button>' +
+              '<button class="row-button" type="button" data-action="down" data-g="' + gi + '" data-i="' + ii + '"' + (ii === group.items.length - 1 ? ' disabled' : '') + ' aria-label="Move item down">↓</button>' +
+              '<button class="row-button" type="button" data-action="remove-item" data-g="' + gi + '" data-i="' + ii + '" aria-label="Remove item">✕</button>' +
+              '</div>';
+          }).join('');
+          return '<div class="contact-group">' +
+            '<div class="group-head"><div class="field">' +
+            '<label>Group heading</label>' +
+            '<input class="group-name" data-g="' + gi + '" data-field="name" placeholder="Main contact (no heading shown on your site)" value="' + escapeHTML(group.name) + '">' +
+            '</div>' +
+            (gi > 0 ? '<button class="button small danger-outline" type="button" data-action="remove-group" data-g="' + gi + '">Remove group</button>' : '') +
+            '</div>' +
+            rows +
+            '<button class="button secondary small" type="button" data-action="add-item" data-g="' + gi + '" style="margin-top:6px">+ Add item</button>' +
+            '</div>';
+        }).join('');
+      }
+
+      function syncContactField(target) {
+        var field = target.getAttribute('data-field');
+        if (!field) return;
+        var gi = Number(target.getAttribute('data-g'));
+        if (field === 'name') { contactGroups[gi].name = target.value; return; }
+        var ii = Number(target.getAttribute('data-i'));
+        if (contactGroups[gi] && contactGroups[gi].items[ii]) contactGroups[gi].items[ii][field] = target.value;
+      }
+
+      contactGroupsEl.addEventListener('input', function (event) { syncContactField(event.target); });
+      contactGroupsEl.addEventListener('change', function (event) { syncContactField(event.target); });
+      contactGroupsEl.addEventListener('click', function (event) {
+        var button = event.target.closest('[data-action]');
+        if (!button || button.disabled) return;
+        var action = button.getAttribute('data-action');
+        var gi = Number(button.getAttribute('data-g'));
+        var ii = Number(button.getAttribute('data-i'));
+        if (action === 'add-item') {
+          if (contactGroups[gi].items.length >= MAX_ITEMS_PER_GROUP) { showToast(LIMIT_MESSAGE); return; }
+          contactGroups[gi].items.push({ type: 'Phone', label: '', value: '' });
+        } else if (action === 'remove-item') {
+          contactGroups[gi].items.splice(ii, 1);
+        } else if (action === 'up' && ii > 0) {
+          var movedUp = contactGroups[gi].items.splice(ii, 1)[0];
+          contactGroups[gi].items.splice(ii - 1, 0, movedUp);
+        } else if (action === 'down' && ii < contactGroups[gi].items.length - 1) {
+          var movedDown = contactGroups[gi].items.splice(ii, 1)[0];
+          contactGroups[gi].items.splice(ii + 1, 0, movedDown);
+        } else if (action === 'remove-group' && gi > 0) {
+          contactGroups.splice(gi, 1);
+        } else {
+          return;
+        }
+        renderContactGroups();
+      });
+      document.getElementById('add-group-button').addEventListener('click', function () {
+        if (contactGroups.length >= MAX_GROUPS) { showToast(LIMIT_MESSAGE); return; }
+        contactGroups.push({ name: '', items: [{ type: 'Phone', label: '', value: '' }] });
+        renderContactGroups();
+      });
+      renderContactGroups();
 
       var styleCatalog = {
         cozy: {
