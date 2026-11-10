@@ -119,6 +119,7 @@ section.warm .kcard{background:#fff}
 #lb-box img{max-width:94vw;max-height:88vh;width:auto;height:auto;display:block;box-shadow:0 30px 70px rgba(0,0,0,.5)}
 #lb-close{position:absolute;top:-14px;right:-14px;width:36px;height:36px;border-radius:50%;background:#fff;color:var(--ink);border:0;font-size:20px;cursor:pointer;line-height:1;box-shadow:0 4px 14px rgba(0,0,0,.35)}
 #gal-grid .kcard{cursor:pointer}
+.kcard .ph{position:relative}.kcard .ph::after{content:'';position:absolute;inset:0;background:rgba(20,16,10,.35) url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27%23ffffff%27%20stroke-width%3D%272%27%20stroke-linecap%3D%27round%27%3E%3Ccircle%20cx%3D%2711%27%20cy%3D%2711%27%20r%3D%277%27%2F%3E%3Cline%20x1%3D%2721%27%20y1%3D%2721%27%20x2%3D%2716.5%27%20y2%3D%2716.5%27%2F%3E%3C%2Fsvg%3E") center/46px 46px no-repeat;opacity:0;transition:opacity .3s}.kcard:hover .ph::after{opacity:1}#lb-prev,#lb-next{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,.45);color:#fff;border:0;font-size:26px;line-height:1;cursor:pointer}#lb-prev{left:14px}#lb-next{right:14px}#lb-prev:disabled,#lb-next:disabled{opacity:.3;cursor:default}#lb-cap{margin-top:12px;text-align:center;color:#fff;font-size:14px}
 .svc-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
 .scard{background:#fff;border:1px solid var(--line);border-radius:6px;padding:28px 26px}
 .scard .ic{font-size:26px;color:var(--blue);margin-bottom:11px}
@@ -316,7 +317,7 @@ footer .fc-lock{color:#e2e8f0}
 <button class="act" id="fc-close2" type="button" style="margin-top:16px">View my live website</button>
 </div>
 </div></div>
-<div id="lb-mask"><div id="lb-box"><button id="lb-close" type="button" aria-label="Close">&times;</button><img id="lb-img" alt=""></div></div>
+<div id="lb-mask"><div id="lb-box"><button id="lb-close" type="button" aria-label="Close">&times;</button><img id="lb-img" alt=""><button id="lb-prev" type="button" aria-label="Previous">&#8249;</button><button id="lb-next" type="button" aria-label="Next">&#8250;</button><div id="lb-cap"></div></div></div>
 <script>
 (function(){
 var CODE='RW-2026-Y7QP',KEY='rw_act_demo',done=false;
@@ -346,13 +347,16 @@ document.addEventListener('DOMContentLoaded',function(){
   document.addEventListener('mouseout',function(e){var t=e.target.closest('.fc-lock');if(t&&!done){t.textContent=t.getAttribute('data-ph');t.classList.remove('fc-peek');}});
   var ftabs=document.querySelectorAll('.ftab'),gcards=document.querySelectorAll('#gal-grid .kcard');
   ftabs.forEach(function(b){b.addEventListener('click',function(){ftabs.forEach(function(x){x.classList.remove('on')});b.classList.add('on');var f=b.getAttribute('data-filter');gcards.forEach(function(c){c.style.display=(f==='all'||c.getAttribute('data-cat')===f)?'':'none';});});});
-  var lbm=document.getElementById('lb-mask'),lbi=document.getElementById('lb-img');
-  function openLb(src){lbi.src=src;lbm.classList.add('open');}
+  var lbm=document.getElementById('lb-mask'),lbi=document.getElementById('lb-img'),lbCap=document.getElementById('lb-cap'),lbPrev=document.getElementById('lb-prev'),lbNext=document.getElementById('lb-next'),lbList=[],lbIdx=0;
+  function lbShow(i){lbIdx=i;var im=lbList[lbIdx].querySelector('.ph img');if(im)lbi.src=im.getAttribute('src');lbCap.textContent='Image '+(lbIdx+1)+' of '+lbList.length;lbPrev.disabled=(lbIdx===0);lbNext.disabled=(lbIdx===lbList.length-1);}
+  function openLb(card){lbList=Array.prototype.filter.call(document.querySelectorAll('#gal-grid .kcard'),function(c){return c.style.display!=='none';});var i=lbList.indexOf(card);if(i<0)i=0;lbShow(i);lbm.classList.add('open');}
   function closeLb(){lbm.classList.remove('open');lbi.removeAttribute('src');}
-  document.querySelectorAll('#gal-grid .kcard').forEach(function(c){c.addEventListener('click',function(){var im=c.querySelector('.ph img');if(im)openLb(im.getAttribute('src'));});});
+  document.querySelectorAll('#gal-grid .kcard').forEach(function(c){c.addEventListener('click',function(){openLb(c);});});
   document.getElementById('lb-close').addEventListener('click',function(e){e.stopPropagation();closeLb();});
+  lbPrev.addEventListener('click',function(e){e.stopPropagation();if(lbIdx>0)lbShow(lbIdx-1);});
+  lbNext.addEventListener('click',function(e){e.stopPropagation();if(lbIdx<lbList.length-1)lbShow(lbIdx+1);});
   lbm.addEventListener('click',function(e){if(e.target===lbm)closeLb();});
-  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLb();});
+  document.addEventListener('keydown',function(e){if(!lbm.classList.contains('open'))return;if(e.key==='Escape')closeLb();else if(e.key==='ArrowLeft'&&lbIdx>0)lbShow(lbIdx-1);else if(e.key==='ArrowRight'&&lbIdx<lbList.length-1)lbShow(lbIdx+1);});
   $('#fc-code').addEventListener('keydown',function(e){if(e.key==='Enter'){tryAct();}});
 });
 })();
