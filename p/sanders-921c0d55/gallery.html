@@ -345,8 +345,25 @@ document.addEventListener('DOMContentLoaded',function(){
   });
   document.addEventListener('mouseover',function(e){var t=e.target.closest('.fc-lock');if(t&&!done){t.textContent=t.getAttribute('data-v');t.classList.add('fc-peek');}});
   document.addEventListener('mouseout',function(e){var t=e.target.closest('.fc-lock');if(t&&!done){t.textContent=t.getAttribute('data-ph');t.classList.remove('fc-peek');}});
-  var ftabs=document.querySelectorAll('.ftab'),gcards=document.querySelectorAll('#gal-grid .kcard');
-  ftabs.forEach(function(b){b.addEventListener('click',function(){ftabs.forEach(function(x){x.classList.remove('on')});b.classList.add('on');var f=b.getAttribute('data-filter');gcards.forEach(function(c){c.style.display=(f==='all'||c.getAttribute('data-cat')===f)?'':'none';});});});
+  var ftabs=document.querySelectorAll('.ftab'),gcards=document.querySelectorAll('#gal-grid .kcard'),flipT=null;
+  function applyFilter(f){
+    var first=new Map();
+    gcards.forEach(function(c){if(c.style.display!=='none'){var r=c.getBoundingClientRect();first.set(c,{x:r.left,y:r.top});}});
+    var show=[];
+    gcards.forEach(function(c){var vis=(f==='all'||c.getAttribute('data-cat')===f);if(vis){show.push(c);c.style.display='';}else{c.style.display='none';}});
+    show.forEach(function(c){
+      var r=c.getBoundingClientRect(),o=first.get(c);
+      c.style.transition='none';
+      if(o){var dx=o.x-r.left,dy=o.y-r.top;if(dx||dy){c.style.transform='translate('+dx+'px,'+dy+'px)';}}
+      else{c.style.transform='scale(.96)';c.style.opacity='0';}
+    });
+    void document.getElementById('gal-grid').offsetHeight;
+    show.forEach(function(c){c.style.transition='transform .5s ease,opacity .5s ease';});
+    requestAnimationFrame(function(){show.forEach(function(c){c.style.transform='';c.style.opacity='';});});
+    if(flipT)clearTimeout(flipT);
+    flipT=setTimeout(function(){show.forEach(function(c){c.style.transition='';});},520);
+  }
+  ftabs.forEach(function(b){b.addEventListener('click',function(){ftabs.forEach(function(x){x.classList.remove('on')});b.classList.add('on');applyFilter(b.getAttribute('data-filter'));});});
   var lbm=document.getElementById('lb-mask'),lbi=document.getElementById('lb-img'),lbCap=document.getElementById('lb-cap'),lbPrev=document.getElementById('lb-prev'),lbNext=document.getElementById('lb-next'),lbList=[],lbIdx=0;
   function lbShow(i){lbIdx=i;var im=lbList[lbIdx].querySelector('.ph img');if(im)lbi.src=im.getAttribute('src');lbCap.textContent='Image '+(lbIdx+1)+' of '+lbList.length;lbPrev.disabled=(lbIdx===0);lbNext.disabled=(lbIdx===lbList.length-1);}
   function openLb(card){lbList=Array.prototype.filter.call(document.querySelectorAll('#gal-grid .kcard'),function(c){return c.style.display!=='none';});var i=lbList.indexOf(card);if(i<0)i=0;lbShow(i);lbm.classList.add('open');}
