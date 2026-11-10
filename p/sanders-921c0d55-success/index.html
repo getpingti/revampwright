@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your activation code — Sanders Cabinetry</title><meta name="robots" content="noindex,nofollow">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;color:#333;background:#f5f3f0;line-height:1.7}
+.wrap{max-width:640px;margin:0 auto;padding:60px 22px}
+.logo{font-family:Georgia,'Times New Roman',serif;font-size:26px;font-weight:700;color:#343434;text-align:center}
+.logo span{color:#8e1a1a}
+.logo small{display:block;font-size:10.5px;letter-spacing:4.5px;color:#777;text-transform:uppercase;margin-top:2px;font-family:-apple-system,'Segoe UI',Roboto,Arial,sans-serif}
+.card{background:#fff;border:1px solid #e9e4da;padding:40px 34px;margin-top:34px;text-align:center;box-shadow:0 10px 30px rgba(52,52,52,.08)}
+.card h1{font-family:Georgia,serif;font-size:30px;color:#343434;margin-bottom:6px}
+.card p{color:#777;font-size:15.5px}
+.code{font-family:Georgia,serif;font-size:40px;font-weight:700;letter-spacing:3px;color:#8e1a1a;background:#f5f3f0;border:1.5px dashed #8e1a1a;padding:16px 10px;margin:24px 0 12px}
+.copy{background:#343434;color:#fff;border:0;padding:12px 26px;font-weight:700;letter-spacing:1px;cursor:pointer;font-size:14px}
+.copy.done{background:#1d5c33}
+.act{display:block;background:#8e1a1a;color:#fff!important;padding:15px 30px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;text-decoration:none;margin-top:22px;font-size:14px}
+.act:hover{background:#6d1414}
+.note{margin-top:18px;font-size:13.5px;color:#999}
+</style></head>
+<body>
+<div class="wrap">
+<div class="logo">Sanders <span>Cabinetry</span><small>Anniston &middot; Alabama</small></div>
+<div class="card">
+<div style="font-size:44px">&#127881;</div>
+<h1>Payment received</h1>
+<p>Thank you! Here is your activation code for your new website.</p>
+<div class="code" id="code">RW-2026-Y7QP</div>
+<button class="copy" id="copy" type="button">Copy code</button>
+<a class="act" href="/p/sanders-921c0d55/">Activate now &rsaquo;</a>
+<p class="note">We&rsquo;ve also emailed this code to you. Enter it on your preview site to unlock the full website &mdash; your free custom domain (.cc) will be connected within 24 hours.</p>
+</div>
+</div>
+<script>
+document.getElementById('copy').addEventListener('click', function(){
+  var t = document.getElementById('code').textContent;
+  function done(){ var b = document.getElementById('copy'); b.textContent = '✓ Copied'; b.classList.add('done'); }
+  if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(t).then(done); }
+  else { var ta = document.createElement('textarea'); ta.value = t; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); } catch(e){} ta.remove(); done(); }
+});
+</script>
+</body></html>
