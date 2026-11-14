@@ -16,7 +16,10 @@ export async function onRequest(context) {
   if (p.startsWith('/assets/') || p.startsWith('/p/' + dir + '/')) {
     return context.next();
   }
-  if (p === '/') p = '/index.html';
+  // Serve the directory path itself so Pages returns the index directly
+  // (rewriting to /index.html makes Pages 308-redirect to the directory URL,
+  // which would expose the /p/ preview path in the address bar).
+  if (p === '/') p = '/';
   const rewritten = new URL(url);
   rewritten.pathname = '/p/' + dir + p;
   const req = new Request(rewritten.toString(), context.request);
