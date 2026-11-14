@@ -12,8 +12,8 @@ export async function onRequest(context) {
   const dir = CLIENTS[url.hostname];
   if (!dir) return context.next();
   let p = url.pathname;
-  // Shared assets and already-prefixed preview paths pass through unchanged.
-  if (p.startsWith('/assets/') || p.startsWith('/p/' + dir + '/')) {
+  // Shared assets, API routes and already-prefixed preview paths pass through unchanged.
+  if (p.startsWith('/assets/') || p.startsWith('/api/') || p.startsWith('/p/' + dir + '/')) {
     return context.next();
   }
   // Serve the directory path itself so Pages returns the index directly
