@@ -20,6 +20,9 @@ export async function onRequest(context) {
   // (rewriting to /index.html makes Pages 308-redirect to the directory URL,
   // which would expose the /p/ preview path in the address bar).
   if (p === '/') p = '/';
+  // Strip a trailing .html so Pages serves the page extensionless (200) instead
+  // of 308-redirecting the rewritten /p/ path into the address bar.
+  if (p.endsWith('.html')) p = p.slice(0, -5);
   const rewritten = new URL(url);
   rewritten.pathname = '/p/' + dir + p;
   const req = new Request(rewritten.toString(), context.request);
