@@ -304,6 +304,7 @@ document.addEventListener('DOMContentLoaded',function(){
   document.addEventListener('mouseover',function(e){var t=e.target.closest('.fc-lock');if(t&&!done){t.textContent=t.getAttribute('data-v');t.classList.add('fc-peek');}});
   document.addEventListener('mouseout',function(e){var t=e.target.closest('.fc-lock');if(t&&!done){t.textContent=t.getAttribute('data-ph');t.classList.remove('fc-peek');}});
   $('#fc-code').addEventListener('keydown',function(e){if(e.key==='Enter'){tryAct();}});
+  if (location.hostname.endsWith('.revampwright.com')&&location.hostname!=='www.revampwright.com'){setDone();}
   if (new URLSearchParams(location.search).get('activate')==='1'){openM();}
 });
 })();
