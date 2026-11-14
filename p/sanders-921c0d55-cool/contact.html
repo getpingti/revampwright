@@ -183,10 +183,10 @@ footer .fc-lock{color:#e2e8f0}
 <div class="scard"><div class="ic">⌖</div><h3>Visit</h3><p>Anniston, Alabama<br>Mon–Fri 7:00 am–4:00 pm</p></div>
 </div>
 <div class="qform"><form class="box" id="qform">
-<div><label>Your name</label><input type="text" placeholder="e.g. Jane Miller" autocomplete="off"></div>
-<div><label>Project type</label><select><option>Kitchen cabinets</option><option>Bathroom vanity</option><option>Built-ins &amp; storage</option><option>Custom furniture</option></select></div>
-<div><label>Phone or email</label><input type="text" placeholder="How do we reach you?" autocomplete="off"></div>
-<div><label>Anything we should know?</label><input type="text" placeholder="Timing, size, must-haves…" autocomplete="off"></div>
+<div><label>Your name</label><input type="text" name="name" placeholder="e.g. Jane Miller" autocomplete="off"></div>
+<div><label>Project type</label><select name="project"><option>Kitchen cabinets</option><option>Bathroom vanity</option><option>Built-ins &amp; storage</option><option>Custom furniture</option></select></div>
+<div><label>Phone or email</label><input type="text" name="contact" placeholder="How do we reach you?" autocomplete="off"></div>
+<div><label>Anything we should know?</label><input type="text" name="notes" placeholder="Timing, size, must-haves…" autocomplete="off"></div>
 <button class="btn" id="qbtn" type="submit" style="grid-column:1/-1">Request an estimate ›</button>
 <div class="note">Estimates are complimentary. Or simply call or email — whichever is easier.</div>
 </form></div>
@@ -245,7 +245,7 @@ document.addEventListener('DOMContentLoaded',function(){
   function go(n){if(!slides.length)return;slides[cur].classList.remove('on');if(dots[cur])dots[cur].classList.remove('on');cur=(n+slides.length)%slides.length;slides[cur].classList.add('on');if(dots[cur])dots[cur].classList.add('on');}
   if(slides.length>1){timer=setInterval(function(){go(cur+1)},5600);dots.forEach(function(d,i){d.addEventListener('click',function(){go(i);clearInterval(timer);timer=setInterval(function(){go(cur+1)},5600);});});}
   var qf=document.getElementById('qform');
-  if(qf){qf.addEventListener('submit',function(e){e.preventDefault();if(done){var b=document.getElementById('qbtn');b.textContent='\u2713 Request received';}else{openM();}});}
+  if(qf){qf.addEventListener('submit',function(e){e.preventDefault();if(!done){openM();return;}var b=document.getElementById('qbtn');b.disabled=true;b.textContent='Sending\u2026';fetch('/api/contact',{method:'POST',body:new FormData(qf)}).then(function(r){return r.json();}).then(function(j){if(j.ok){b.textContent='\u2713 Request received';}else{b.disabled=false;b.textContent='Something went wrong \u2014 please call or email instead';}}).catch(function(){b.disabled=false;b.textContent='Something went wrong \u2014 please call or email instead';});});}
   document.addEventListener('click',function(e){
     var t=e.target.closest('[data-fc-open],.fc-lock');
     if(t&&!done){e.preventDefault();openM();}
