@@ -3,7 +3,7 @@
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Custom Cabinets &amp; Woodwork in Madison, GA — Cherokee Cabinet</title><meta name="robots" content="noindex,nofollow">
 <style>
-:root{--char:#343434;--char2:#262626;--camel:#8e1a1a;--camel-d:#6d1414;--wood:#6b4a2f;--ink:#333333;--mut:#777777;--line:#e9e4da;--warm:#f5f3f0;--peekt:#f3e3cf}
+:root{--char:#2F2519;--char2:#241C12;--camel:#FA7D09;--camel-d:#D96A06;--wood:#6b4a2f;--ink:#2F2519;--mut:#777777;--line:#e9e4da;--warm:#f5f3f0;--peekt:#f3e3cf}
 *{margin:0;padding:0;box-sizing:border-box}
 body{font-family:-apple-system,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;color:var(--ink);background:#fff;line-height:1.7;padding-bottom:54px}
 a{color:var(--camel-d)}
@@ -13,7 +13,7 @@ img{display:block;max-width:100%}
 .topbar .wrap{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;align-items:center}
 .topbar .help{color:#fff;letter-spacing:1.2px;font-size:12.5px;text-transform:uppercase}
 .topbar .fc-lock{color:#fff;border-bottom-color:#fff}
-header.site{background:#fff;position:sticky;top:0;z-index:50;box-shadow:0 1px 10px rgba(52,52,52,.08)}
+header.site{background:#fff;position:sticky;top:0;z-index:50;box-shadow:0 1px 10px rgba(47,37,25,.08)}
 header.site .wrap{display:flex;align-items:center;min-height:78px;gap:26px;flex-wrap:wrap}
 .logo{display:flex;align-items:center;gap:10px;text-decoration:none;line-height:1.1}.logo .mark{height:40px;width:auto;flex:none}.logo .lt{display:block}
 .logo .n{font-family:Georgia,'Times New Roman',serif;font-size:26px;font-weight:700;color:var(--char);letter-spacing:1px}
@@ -136,7 +136,7 @@ footer .flogo span{color:var(--camel)}
 footer .fc-lock{color:#e8dcc4}
 .sample-note{border-top:1px solid #454545;margin-top:38px;padding:17px 0 20px;color:#8f8674;font-size:13px}
 .fc-lock{cursor:pointer;border-bottom:1px dotted var(--camel-d)}
-.fc-lock.fc-peek{background:#d79d6c;color:#20180f;font-weight:700;border-radius:3px;padding:0 3px}
+.fc-lock.fc-peek{background:#FDBA7A;color:#20180f;font-weight:700;border-radius:3px;padding:0 3px}
 .fc-live{cursor:default;border-bottom:none;font-weight:600}
 #fc-bar{position:fixed;left:0;right:0;bottom:0;z-index:999;background:#1d1d1d;color:#f3ead8;padding:10px 16px;display:flex;gap:12px;align-items:center;justify-content:center;flex-wrap:wrap;font-size:14.5px;box-shadow:0 -2px 14px rgba(0,0,0,.3)}
 #fc-bar button{background:var(--camel);color:#fff;border:0;border-radius:0;padding:9px 18px;font-weight:700;cursor:pointer;letter-spacing:.6px}
@@ -236,6 +236,8 @@ footer .fc-lock{color:#e8dcc4}
 <div class="center"><span class="kick">What We Build</span><h2>Kitchens, baths &amp; more</h2></div>
 <div class="brands"><div>Kitchens</div><div>Bathrooms</div><div>Bookcases</div><div>Wet Bars</div><div>Commercial</div><div>Miscellaneous</div><div>Mantels</div><div>Wine Racks</div></div>
 </div></section>
+
+<section class="warm"><div class="wrap"><div class="center"><span class="kick">Word of Mouth</span><h2>Built one customer at a time</h2><p class="lede" style="font-family:Georgia,serif;font-size:20px">“I have built my business one customer at a time and strictly by word of mouth referrals.”</p><p style="margin-top:14px;color:var(--mut)">— Robert “Robbie” Stell, owner of Cherokee Cabinet</p></div></div></section>
 <footer><div class="wrap">
 <div class="cols">
 <div><div class="flogo">Cherokee <span>Cabinetry</span></div><p style="margin-top:12px">Custom cabinets and storage solutions, designed and built in Madison, Georgia.</p><p style="margin-top:10px">Madison, Georgia</p></div>
@@ -281,7 +283,7 @@ function $(s){return document.querySelector(s)}
 function setDone(){done=true;$('#fc-bar').style.display='none';var cp=document.getElementById('cmp-pill');if(cp)cp.style.display='none';document.body.style.paddingBottom='0';document.querySelectorAll('.fc-lock').forEach(function(el){el.textContent=el.getAttribute('data-v');el.classList.remove('fc-peek');el.classList.add('fc-live');});}
 function openM(){if(done)return;$('#fc-mask').style.display='flex';setTimeout(function(){$('#fc-code').focus()},60);}
 function closeM(){$('#fc-mask').style.display='none';}
-function confetti(){var colors=['#8e1a1a','#6b4a2f','#3f7d4e','#efe3cd','#fdd677'];for(var i=0;i<110;i++){var d=document.createElement('div');d.className='confetti';var s=6+Math.random()*7;d.style.cssText='left:'+(Math.random()*100)+'vw;width:'+s+'px;height:'+(s*0.55)+'px;background:'+colors[i%colors.length]+';animation:fcfall '+(2.2+Math.random()*1.8)+'s ease-in forwards;transform:rotate('+(Math.random()*360)+'deg)';document.body.appendChild(d);setTimeout(function(el){el.remove()},4500,d);}}
+function confetti(){var colors=['#FA7D09','#6b4a2f','#D96A06','#efe3cd','#FDBA7A'];for(var i=0;i<110;i++){var d=document.createElement('div');d.className='confetti';var s=6+Math.random()*7;d.style.cssText='left:'+(Math.random()*100)+'vw;width:'+s+'px;height:'+(s*0.55)+'px;background:'+colors[i%colors.length]+';animation:fcfall '+(2.2+Math.random()*1.8)+'s ease-in forwards;transform:rotate('+(Math.random()*360)+'deg)';document.body.appendChild(d);setTimeout(function(el){el.remove()},4500,d);}}
 function tryAct(){var v=$('#fc-code').value.trim().toUpperCase();if(v===CODE){closeM();setDone();confetti();$('#fc-mask').style.display='flex';$('#fc-form-panel').style.display='none';$('#fc-done-panel').style.display='block';}else{$('#fc-err').textContent='That code doesn\'t match. Please check the code in your email and try again.';$('#fc-modal').classList.remove('shake');void $('#fc-modal').offsetWidth;$('#fc-modal').classList.add('shake');}}
 document.addEventListener('DOMContentLoaded',function(){
   var slides=document.querySelectorAll('.slide'),dots=document.querySelectorAll('.dots button'),cur=0,timer=null;
