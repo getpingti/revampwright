@@ -6,6 +6,7 @@
 const CLIENTS = {
   'sanderscabinetry.revampwright.com': 'sanders-921c0d55',
   'cherokeecabinets.revampwright.com': 'cherokee-e3e05375',
+  'fallscabinet.revampwright.com': 'falls-a9c6953a',
 };
 
 export async function onRequest(context) {
