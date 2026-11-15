@@ -5,6 +5,7 @@
 // live (unlocked) site while the /p/ path keeps showing the locked preview.
 const CLIENTS = {
   'sanderscabinetry.revampwright.com': 'sanders-921c0d55',
+  'cherokeecabinets.revampwright.com': 'cherokee-e3e05375',
 };
 
 export async function onRequest(context) {
