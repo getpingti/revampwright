@@ -245,6 +245,7 @@ document.addEventListener('DOMContentLoaded',function(){
   if (location.hostname.endsWith('.revampwright.com')&&location.hostname!=='www.revampwright.com'){setDone();}
   if (new URLSearchParams(location.search).get('activate')==='1'){openM();}
 });
+  window.addEventListener('pageshow',function(){if(new URLSearchParams(location.search).get('activate')==='1'){openM();}});
 })();
 </script><script>
 // Visit tracking (first-party, no cookies): records a page view on load and
