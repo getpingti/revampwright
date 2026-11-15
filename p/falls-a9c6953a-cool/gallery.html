@@ -122,7 +122,7 @@ section.soft{background:var(--soft)}
 .ftab:hover{border-color:var(--steel);color:var(--steel)}
 .ftab.on{background:var(--steel);border-color:var(--steel);color:#fff}
 .gal2{display:block;overflow:hidden}
-.kcard{width:33.333%;padding:0 10px 20px;box-sizing:border-box;float:left;cursor:pointer}
+.kcard{width:33.3%;padding:0 10px 20px;box-sizing:border-box;float:left;cursor:pointer}
 .kcard .ph{overflow:hidden;aspect-ratio:4/3;background:#fff;border:1px solid var(--line);position:relative}
 .kcard .ph img{width:100%;height:100%;object-fit:cover;transition:transform .7s}
 .kcard:hover .ph img{transform:scale(1.07)}
@@ -246,7 +246,7 @@ document.addEventListener('DOMContentLoaded',function(){
   document.addEventListener('mouseover',function(e){var t=e.target.closest('.fc-lock');if(t&&!done){t.textContent=t.getAttribute('data-v');t.classList.add('fc-peek');}});
   document.addEventListener('mouseout',function(e){var t=e.target.closest('.fc-lock');if(t&&!done){t.textContent=t.getAttribute('data-ph');t.classList.remove('fc-peek');}});
   var ftabs=document.querySelectorAll('.ftab'),ggrid=document.getElementById('gal-grid');
-  if(ggrid&&window.jQuery){var $grid=jQuery('#gal-grid');$grid.isotope({itemSelector:'.kcard',layoutMode:'fitRows'});jQuery('#gal-grid img').on('load',function(){$grid.isotope('layout');});window.addEventListener('load',function(){$grid.isotope('layout');});
+  if(ggrid&&window.jQuery){var $grid=jQuery('#gal-grid');$grid.isotope({itemSelector:'.kcard',layoutMode:'fitRows'});
   ftabs.forEach(function(b){b.addEventListener('click',function(){ftabs.forEach(function(x){x.classList.remove('on')});b.classList.add('on');var f=b.getAttribute('data-filter');$grid.isotope({filter:f==='all'?'*':function(){return jQuery(this).attr('data-cat')===f;}});});});}
   var lbm=document.getElementById('lb-mask'),lbi=document.getElementById('lb-img'),lbCap=document.getElementById('lb-cap'),lbPrev=document.getElementById('lb-prev'),lbNext=document.getElementById('lb-next'),lbList=[],lbIdx=0,lbCapFn=null;
   function lbShow(i){lbIdx=i;var card=lbList[lbIdx];var im=card.querySelector('.ph img');if(im)lbi.src=im.getAttribute('data-full')||im.getAttribute('src');lbCap.textContent=lbCapFn?lbCapFn(card,lbIdx,lbList.length):('Image '+(lbIdx+1)+' of '+lbList.length);lbPrev.disabled=(lbIdx===0);lbNext.disabled=(lbIdx===lbList.length-1);}
