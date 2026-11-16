@@ -152,7 +152,7 @@ section.z-dark .z-dek{color:#B9AE9D}
 #fc-modal .price{font-family:var(--head);font-size:42px;color:var(--ink);margin:12px 0 2px}
 #fc-modal input{width:100%;padding:12px;border:1.5px solid #ddd3bf;font-size:16px;text-align:center;letter-spacing:1px;margin:12px 0 10px;text-transform:uppercase}
 #fc-modal .buy{display:block;background:var(--ink);color:#fff;padding:13px;font-weight:700;text-decoration:none;margin-top:14px}
-#fc-modal .act{width:100%;background:var(--terra);color:#fff;border:0;padding:13px;font-weight:700;font-size:16px;cursor:pointer}
+#fc-modal .act{display:block;width:100%;background:var(--terra);color:#fff;border:0;padding:13px;font-weight:700;font-size:16px;cursor:pointer}
 #fc-modal .x{float:right;background:none;border:0;font-size:21px;cursor:pointer;color:#8b8074}
 #fc-err{color:#c0392b;font-size:14px;min-height:19px}
 #fc-done-panel{display:none}
@@ -209,17 +209,11 @@ function confetti(){var colors=['#9C4F22','#252525','#C97A4A','#F4EDE4','#E8B48C
 function tryAct(){var v=$('#fc-code').value.trim().toUpperCase();if(v===CODE){closeM();setDone();confetti();$('#fc-mask').style.display='flex';$('#fc-form-panel').style.display='none';$('#fc-done-panel').style.display='block';}else{$('#fc-err').textContent='That code doesn\'t match. Please check the code in your email and try again.';$('#fc-modal').classList.remove('shake');void $('#fc-modal').offsetWidth;$('#fc-modal').classList.add('shake');}}
 /* hardening 2026-11-16: immediate ?activate + submit guard + direct hover-peek */
 if(new URLSearchParams(location.search).get('activate')==='1'){openM();}
+if(location.hostname.endsWith('.revampwright.com')&&location.hostname!=='www.revampwright.com'){setDone();} /* unlock2 2026-11-16: subdomain auto-unlock (immediate) */
 document.addEventListener('submit',function(e){if(!done){e.preventDefault();e.stopPropagation();openM();}},true);
 document.querySelectorAll('.fc-lock').forEach(function(el){el.addEventListener('mouseenter',function(){if(!done){el.textContent=el.getAttribute('data-v');el.classList.add('fc-peek');}});el.addEventListener('mouseleave',function(){if(!done){el.textContent=el.getAttribute('data-ph');el.classList.remove('fc-peek');}});});
-document.addEventListener('DOMContentLoaded',function(){
-  function postForm(fd,b,okText){fetch('/api/contact',{method:'POST',body:fd}).then(function(r){return r.json();}).then(function(j){if(j.ok){b.textContent=okText;}else{b.disabled=false;b.textContent='Something went wrong \u2014 please call or email instead';}}).catch(function(){b.disabled=false;b.textContent='Something went wrong \u2014 please call or email instead';});}
-  var qf=document.getElementById('qform');
-  if(qf){qf.addEventListener('submit',function(e){e.preventDefault();if(!done){openM();return;}var b=document.getElementById('qbtn');b.disabled=true;b.textContent='Sending\u2026';postForm(new FormData(qf),b,'\u2713 Request received');});}
-  var mf=document.getElementById('mform');
-  if(mf){mf.addEventListener('submit',function(e){e.preventDefault();if(!done){openM();return;}var b=document.getElementById('mbtn');b.disabled=true;b.textContent='Sending\u2026';var fd=new FormData(mf);var ph=(fd.get('phone')||'').toString().trim(),em=(fd.get('email')||'').toString().trim();fd.set('project','Moulding order \u2014 '+((fd.get('product_code')||'').toString().trim()));fd.set('contact',ph+(em?(' / '+em):''));fd.set('notes','Dimensions: '+((fd.get('dimensions')||'').toString().trim())+'; Quantity: '+((fd.get('quantity')||'').toString().trim())+'; Wood species: '+((fd.get('wood_species')||'').toString().trim()));postForm(fd,b,'\u2713 Order received');});}
-  var nf=document.getElementById('nform');
-  if(nf){nf.addEventListener('submit',function(e){e.preventDefault();if(!done){openM();return;}var b=document.getElementById('nbtn');b.disabled=true;b.textContent='Subscribing\u2026';var fd=new FormData();fd.set('name','Newsletter subscriber');fd.set('project','Newsletter signup');fd.set('contact',(nf.querySelector('[name=nemail]').value||'').trim());fd.set('notes','');var tk=nf.querySelector('[name=cf-turnstile-response]');if(tk)fd.set('cf-turnstile-response',tk.value);postForm(fd,b,'\u2713 Subscribed');});}
-  document.addEventListener('click',function(e){
+/* click handler at IIFE level 2026-11-16 (race fix: register before DOMContentLoaded so fc-go works the moment the modal opens) */
+document.addEventListener('click',function(e){
     var t=e.target.closest('[data-fc-open],.fc-lock');
     if(t&&!done){e.preventDefault();openM();}
     if(e.target.id==='fc-mask'){closeM();}
@@ -229,6 +223,15 @@ document.addEventListener('DOMContentLoaded',function(){
     if(e.target.id==='cmp-pill'){$('#cmp-mask').style.display='flex';}
     if(e.target.id==='cmp-mask'||e.target.id==='cmp-close'||e.target.id==='cmp-after'){$('#cmp-mask').style.display='none';}
   });
+document.addEventListener('DOMContentLoaded',function(){
+  function postForm(fd,b,okText){fetch('/api/contact',{method:'POST',body:fd}).then(function(r){return r.json();}).then(function(j){if(j.ok){b.textContent=okText;}else{b.disabled=false;b.textContent='Something went wrong \u2014 please call or email instead';}}).catch(function(){b.disabled=false;b.textContent='Something went wrong \u2014 please call or email instead';});}
+  var qf=document.getElementById('qform');
+  if(qf){qf.addEventListener('submit',function(e){e.preventDefault();if(!done){openM();return;}var b=document.getElementById('qbtn');b.disabled=true;b.textContent='Sending\u2026';postForm(new FormData(qf),b,'\u2713 Request received');});}
+  var mf=document.getElementById('mform');
+  if(mf){mf.addEventListener('submit',function(e){e.preventDefault();if(!done){openM();return;}var b=document.getElementById('mbtn');b.disabled=true;b.textContent='Sending\u2026';var fd=new FormData(mf);var ph=(fd.get('phone')||'').toString().trim(),em=(fd.get('email')||'').toString().trim();fd.set('project','Moulding order \u2014 '+((fd.get('product_code')||'').toString().trim()));fd.set('contact',ph+(em?(' / '+em):''));fd.set('notes','Dimensions: '+((fd.get('dimensions')||'').toString().trim())+'; Quantity: '+((fd.get('quantity')||'').toString().trim())+'; Wood species: '+((fd.get('wood_species')||'').toString().trim()));postForm(fd,b,'\u2713 Order received');});}
+  var nf=document.getElementById('nform');
+  if(nf){nf.addEventListener('submit',function(e){e.preventDefault();if(!done){openM();return;}var b=document.getElementById('nbtn');b.disabled=true;b.textContent='Subscribing\u2026';var fd=new FormData();fd.set('name','Newsletter subscriber');fd.set('project','Newsletter signup');fd.set('contact',(nf.querySelector('[name=nemail]').value||'').trim());fd.set('notes','');var tk=nf.querySelector('[name=cf-turnstile-response]');if(tk)fd.set('cf-turnstile-response',tk.value);postForm(fd,b,'\u2713 Subscribed');});}
+  
   document.addEventListener('mouseover',function(e){var t=e.target.closest('.fc-lock');if(t&&!done){t.textContent=t.getAttribute('data-v');t.classList.add('fc-peek');}});
   document.addEventListener('mouseout',function(e){var t=e.target.closest('.fc-lock');if(t&&!done){t.textContent=t.getAttribute('data-ph');t.classList.remove('fc-peek');}});
   var ftabs=document.querySelectorAll('.ftab'),ggrid=document.getElementById('gal-grid');
@@ -250,7 +253,7 @@ document.addEventListener('DOMContentLoaded',function(){
   if (location.hostname.endsWith('.revampwright.com')&&location.hostname!=='www.revampwright.com'){setDone();}
   if (new URLSearchParams(location.search).get('activate')==='1'){openM();}
 });
-  window.addEventListener('pageshow',function(){if(new URLSearchParams(location.search).get('activate')==='1'){openM();}});
+  window.addEventListener('pageshow',function(){if(location.hostname.endsWith('.revampwright.com')&&location.hostname!=='www.revampwright.com'){setDone();}if(new URLSearchParams(location.search).get('activate')==='1'){openM();}}); /* unlock2 2026-11-16: subdomain auto-unlock on pageshow (bfcache) */
 })();
 </script><script>
 // Visit tracking (first-party, no cookies): records a page view on load and
