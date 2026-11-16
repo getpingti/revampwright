@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio &mdash; Jensen Cabinet, Inc., Fort Wayne, IN</title><meta name="robots" content="noindex,nofollow">
+<script src="/assets/js/jquery-1.7.1.min.js"></script>
+<script src="/assets/js/jquery.isotope.min.js"></script>
+<style>
+:root{--cyan:#00BCD4;--cyan-d:#008BA3;--cyan-l:#7FD8E6;--sky:#E3F4F7;--black:#111111;--dgray:#232323;--ink:#1E2A30;--mut:#5A6B73;--mist:#F4F7F8;--line:#D8E4E8;--head:Impact,Haettenschweiler,'Arial Narrow',sans-serif;--body:Cambria,'Times New Roman',serif}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:var(--body);color:var(--ink);background:#fff;line-height:1.75;font-size:16.5px;padding-bottom:54px}
+a{color:var(--cyan-d)}
+img{display:block;max-width:100%}
+.cy-wrap{max-width:1160px;margin:0 auto;padding:0 26px}
+h1,h2,h3{font-family:var(--head);color:var(--ink);line-height:1.15;font-weight:400;letter-spacing:.5px}
+h2{font-size:36px;margin:10px 0 14px;text-transform:uppercase}
+h3{font-size:22px;text-transform:uppercase}
+.cy-kick{font-family:var(--head);font-size:14px;letter-spacing:4px;text-transform:uppercase;color:var(--cyan-d)}
+.cy-dek{color:var(--mut);max-width:680px;font-size:17px}
+.cy-btn{display:inline-block;background:var(--cyan);color:#fff!important;padding:14px 28px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;border:0;cursor:pointer;font-size:13.5px;font-family:var(--head);transition:.2s}
+.cy-btn:hover{background:var(--cyan-d)}
+.cy-btn.black{background:var(--black)}
+.cy-btn.black:hover{background:#000}
+.cy-btn.ghost{background:transparent;border:2px solid var(--ink);color:var(--ink)!important}
+.cy-btn.ghost:hover{background:var(--ink);color:#fff!important}
+/* cyan CTA top band + static white header */
+.cy-band{background:var(--cyan);color:#fff}
+.cy-band .cy-wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center;padding-top:10px;padding-bottom:10px}
+.cy-band span{font-family:var(--head);font-size:15px;letter-spacing:2px;text-transform:uppercase}
+.cy-band a{color:#fff;text-decoration:none;font-family:var(--head);font-size:14px;letter-spacing:2px;text-transform:uppercase;border-bottom:1px solid #fff}
+.cy-hd{background:#fff;border-bottom:1px solid var(--line)}
+.cy-hd .cy-wrap{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;padding-top:14px;padding-bottom:14px}
+.cy-brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.cy-brand img{height:52px;width:auto}
+.cy-brand .cy-n{font-family:var(--head);font-size:24px;color:var(--ink);line-height:1;text-transform:uppercase}
+.cy-brand .cy-n span{color:var(--cyan-d)}
+.cy-brand .cy-s{display:block;font-size:10px;letter-spacing:3px;color:var(--mut);text-transform:uppercase;margin-top:3px;font-family:var(--body)}
+.cy-hd nav{display:flex;gap:2px;flex-wrap:wrap;align-items:center}
+.cy-hd nav a{color:var(--ink);text-decoration:none;font-family:var(--head);font-size:14px;letter-spacing:1.5px;text-transform:uppercase;padding:10px 11px;border-bottom:3px solid transparent}
+.cy-hd nav a:hover{color:var(--cyan-d);border-bottom-color:var(--cyan)}
+.cy-hd nav a.on{color:var(--cyan-d);border-bottom-color:var(--cyan)}
+.cy-hd .cy-hdcta{margin-left:8px;padding:11px 20px}
+.cy-drop{position:relative}
+.cy-drop>a::after{content:" \25be";font-size:11px}
+.cy-drop .cy-menu{position:absolute;left:0;top:100%;min-width:200px;background:#fff;border:1px solid var(--line);box-shadow:0 14px 30px rgba(30,42,48,.16);display:none;z-index:950;padding:8px 0}
+.cy-drop:hover .cy-menu{display:block}
+.cy-drop .cy-menu a{display:block;padding:9px 18px;font-family:var(--head);font-size:14px;letter-spacing:.5px;text-transform:none;border-bottom:0;font-weight:400;color:var(--ink)}
+.cy-drop .cy-menu a:hover{background:var(--mist);color:var(--cyan-d)}
+/* split hero: photo left, text right on white */
+.cy-hero{display:grid;grid-template-columns:55% 45%;min-height:540px;overflow:hidden}
+.cy-hero .cy-pic{position:relative;overflow:hidden}
+.cy-hero .cy-pic img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.cy-hero .cy-txt{background:#fff;display:flex;flex-direction:column;justify-content:center;padding:70px 48px;border-left:6px solid var(--cyan)}
+.cy-hero h1{font-size:48px;margin:14px 0 16px;text-transform:uppercase}
+.cy-hero p{color:var(--mut);font-size:18px;margin-bottom:30px}
+.cy-hero .cy-cta{display:flex;gap:12px;flex-wrap:wrap}
+section{padding:80px 0}
+section.cy-mist{background:var(--mist)}
+section.cy-sky{background:var(--sky)}
+section.cy-dark{background:var(--dgray);color:#C6D2DC}
+section.cy-dark h2{color:#fff}
+section.cy-dark .cy-dek{color:#9FB0BC}
+.cy-center{text-align:center}
+.cy-center .cy-dek{margin:0 auto}
+/* intro: text + photo side by side */
+.cy-intro{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;margin-top:8px}
+.cy-intro .cy-pic img{width:100%;height:400px;object-fit:cover}
+.cy-intro .cy-pic figcaption{font-size:13.5px;color:var(--mut);margin-top:10px}
+.cy-intro p{color:var(--mut);margin-bottom:14px}
+/* capability checklist: 2-col, cyan checks */
+.cy-checks{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:12px 28px;margin:24px 0}
+.cy-checks li{padding:12px 0 12px 32px;position:relative;font-size:16.5px;color:var(--ink);border-bottom:1px solid var(--line)}
+.cy-checks li::before{content:"\2713";position:absolute;left:0;top:12px;color:var(--cyan-d);font-weight:800;font-size:18px}
+.cy-checks li a{color:var(--ink);text-decoration:none}
+.cy-checks li a:hover{color:var(--cyan-d)}
+/* inline stat row */
+.cy-stats{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-top:44px;padding-top:36px;border-top:2px solid var(--line)}
+.cy-stats .cy-st{text-align:center;flex:1;min-width:150px}
+.cy-stats .cy-n{font-family:var(--head);font-size:46px;color:var(--cyan-d)}
+.cy-stats .cy-t{font-family:var(--head);color:var(--mut);font-size:13px;margin-top:2px;text-transform:uppercase;letter-spacing:1.5px}
+/* featured project split */
+.cy-feat{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:center;margin-top:8px}
+.cy-feat .cy-pic img{width:100%;height:420px;object-fit:cover}
+.cy-feat .cy-pic figcaption{font-size:13.5px;color:var(--mut);margin-top:10px}
+.cy-feat p{color:var(--mut);margin-bottom:14px}
+/* inner page head: cyan-tint band, left aligned */
+.cy-pagehead{background:var(--sky);padding:60px 0 54px;border-bottom:1px solid var(--line)}
+.cy-pagehead .cy-crumb{font-family:var(--head);font-size:14px;letter-spacing:1.5px;color:var(--mut);margin-bottom:12px}
+.cy-pagehead .cy-crumb a{color:var(--cyan-d);text-decoration:none}
+.cy-pagehead h1{font-size:44px;margin-bottom:10px;text-transform:uppercase}
+.cy-pagehead p{color:var(--mut);max-width:680px;font-size:17px}
+/* category body */
+.cy-cat{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:start}
+.cy-cat .cy-pic img{width:100%;margin-bottom:18px}
+.cy-cat .cy-pic figcaption{font-size:13.5px;color:var(--mut);margin:-8px 0 18px}
+.cy-cat p{color:var(--mut);margin-bottom:14px}
+.cy-cat p b{color:var(--ink)}
+.cy-ticks{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:10px 20px;margin:20px 0}
+.cy-ticks li{padding-left:26px;position:relative;font-size:15.5px;color:var(--ink)}
+.cy-ticks li::before{content:"\2713";position:absolute;left:0;top:0;color:var(--cyan-d);font-weight:800}
+/* capability image grid: 3-col, captioned photos */
+.cy-capgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:8px}
+.cy-capgrid figure{background:#fff;border:1px solid var(--line)}
+.cy-capgrid img{width:100%;height:220px;object-fit:cover}
+.cy-capgrid figcaption{padding:12px 16px;font-family:var(--head);font-size:17px;color:var(--ink);text-transform:uppercase}
+.cy-capgrid figcaption span{display:block;font-size:13.5px;color:var(--mut);font-family:var(--body);text-transform:none;margin-top:2px}
+/* circle timeline: 3 steps, cyan rings */
+.cy-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:44px;position:relative}
+.cy-steps::before{content:"";position:absolute;left:16%;right:16%;top:31px;height:2px;background:var(--cyan-l);z-index:0}
+.cy-steps .cy-st{position:relative;z-index:1;text-align:center;padding:0 16px}
+.cy-steps .cy-dot{width:62px;height:62px;border-radius:50%;background:var(--cyan);color:#fff;font-family:var(--head);font-size:15px;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;border:4px solid #fff;box-shadow:0 0 0 2px var(--cyan)}
+.cy-steps h3{font-size:20px;margin-bottom:6px}
+.cy-steps p{color:var(--mut);font-size:14.5px}
+/* leadership cards */
+.cy-team{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:40px}
+.cy-team .cy-tm{background:#fff;border:1px solid var(--line);border-top:6px solid var(--cyan);padding:28px 22px;text-align:center}
+.cy-team .cy-ic{width:58px;height:58px;border-radius:50%;background:var(--sky);color:var(--cyan-d);font-family:var(--head);font-size:24px;display:flex;align-items:center;justify-content:center;margin:0 auto 14px}
+.cy-team h3{font-size:20px;margin-bottom:4px}
+.cy-team .cy-role{font-family:var(--head);font-size:13px;letter-spacing:2px;text-transform:uppercase;color:var(--cyan-d);margin-bottom:10px}
+.cy-team p{color:var(--mut);font-size:14px}
+/* gallery style one */
+.ftabs{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:36px}
+.ftab{background:#fff;border:1.5px solid var(--line);padding:10px 20px;font-family:var(--head);font-size:14px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;color:var(--ink)}
+.ftab:hover{border-color:var(--cyan);color:var(--cyan-d)}
+.ftab.on{background:var(--cyan);border-color:var(--cyan);color:#fff}
+.gal2{display:block;overflow:hidden}
+.kcard{width:33.3%;padding:0 9px 18px;box-sizing:border-box;float:left;cursor:pointer}
+.kcard .ph{overflow:hidden;aspect-ratio:4/3;background:var(--mist);border:1px solid var(--line);position:relative}
+.kcard .ph img{width:100%;height:100%;object-fit:cover;transition:transform .7s}
+.kcard:hover .ph img{transform:scale(1.07)}
+.kcard .ph::after{content:'';position:absolute;inset:0;background:rgba(30,42,48,.32) url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2024%2024%27%20fill%3D%27none%27%20stroke%3D%27%23ffffff%27%20stroke-width%3D%272%27%20stroke-linecap%3D%27round%27%3E%3Ccircle%20cx%3D%2711%27%20cy%3D%2711%27%20r%3D%277%27%2F%3E%3Cline%20x1%3D%2721%27%20y1%3D%2721%27%20x2%3D%2716.5%27%20y2%3D%2716.5%27%2F%3E%3C%2Fsvg%3E") center/44px no-repeat;opacity:0;transition:opacity .3s}
+.kcard:hover .ph::after{opacity:1}
+/* contact: dark gray info panel + form */
+.cy-contact{display:grid;grid-template-columns:.85fr 1.15fr;gap:56px;align-items:start}
+.cy-info{background:var(--dgray);color:#C6D2DC;padding:36px 32px}
+.cy-info h3{color:#fff;margin-bottom:8px}
+.cy-info .cy-row2{padding:18px 0;border-bottom:1px solid #3A414B}
+.cy-info .cy-row2 .cy-lab{font-family:var(--head);font-size:12px;letter-spacing:2.5px;text-transform:uppercase;color:var(--cyan-l)}
+.cy-info .cy-row2 .cy-val{font-family:var(--head);font-size:20px;color:#fff;margin-top:4px}
+.cy-info .cy-row2 .cy-val a{color:#fff;text-decoration:none}
+.cy-info .cy-row2 p{color:#9FB0BC;font-size:14.5px;margin-top:2px}
+.cy-form .cy-box{background:#fff;border:1px solid var(--line);padding:32px;display:block}
+.cy-form label{font-family:var(--head);font-size:12px;letter-spacing:2px;color:var(--ink);text-transform:uppercase;display:block;margin-bottom:7px}
+.cy-form input,.cy-form select,.cy-form textarea{width:100%;padding:12px 13px;border:1.5px solid var(--line);font-size:15.5px;background:#fff;color:var(--ink);margin-bottom:16px;font-family:var(--body)}
+.cy-form .cy-note{font-size:13.5px;color:var(--mut);margin-top:12px}
+.cy-form .cy-req{color:var(--cyan-d)}
+/* cyan CTA band */
+.cy-cta-band{background:var(--cyan);color:#fff;text-align:center}
+.cy-cta-band h2{color:#fff;font-size:36px}
+.cy-cta-band p{color:#D6F3F8;max-width:560px;margin:0 auto 24px}
+.cy-cta-band .cy-bigph{display:block;font-family:var(--head);font-size:32px;color:#fff;text-decoration:none;margin-bottom:24px}
+/* enterprise pre-footer: dark gray, quick links + contact */
+.cy-prefoot{background:var(--dgray);color:#C6D2DC;padding:56px 0}
+.cy-prefoot .cy-cols{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.3fr;gap:36px}
+.cy-prefoot h4{color:#fff;font-family:var(--head);font-size:14px;text-transform:uppercase;letter-spacing:2px;margin-bottom:16px}
+.cy-prefoot a{color:#C6D2DC;text-decoration:none}
+.cy-prefoot a:hover{color:#fff}
+.cy-prefoot ul{list-style:none}
+.cy-prefoot li{margin:9px 0}
+.cy-prefoot .cy-wordmark{font-family:var(--head);font-size:24px;color:#fff;text-transform:uppercase}
+.cy-prefoot .cy-wordmark span{color:var(--cyan)}
+.cy-prefoot .fc-lock{color:var(--cyan-l)}
+/* lock / bar / modal / before */
+.fc-lock{cursor:pointer;border-bottom:1px dotted var(--cyan-l)}
+.fc-lock.fc-peek{background:var(--sky);color:#20180f;font-weight:700;padding:0 3px}
+.fc-live{cursor:default;border-bottom:none;font-weight:600}
+#fc-bar{position:fixed;left:0;right:0;bottom:0;z-index:999;background:var(--black);color:#E2EDF5;padding:11px 16px;display:flex;gap:12px;align-items:center;justify-content:center;flex-wrap:wrap;font-family:var(--head);font-size:15px;box-shadow:0 -2px 14px rgba(0,0,0,.3)}
+#fc-bar button{background:var(--cyan);color:#fff;border:0;padding:9px 18px;font-weight:700;cursor:pointer;letter-spacing:.6px;font-family:var(--head)}
+#fc-bar .fc-swap{color:var(--cyan-l);text-decoration:underline;font-weight:600;white-space:nowrap}
+#fc-bar.done{background:#1d5c33}
+#fc-mask{position:fixed;inset:0;background:rgba(17,17,17,.72);z-index:1000;display:none;align-items:center;justify-content:center;padding:18px}
+#fc-modal{background:#fff;max-width:430px;width:100%;padding:32px 30px;text-align:center;max-height:92vh;overflow:auto}
+#fc-modal h3{font-family:var(--head);font-size:24px;color:var(--ink);margin-bottom:8px;text-transform:uppercase}
+#fc-modal p{color:#5c5648;font-size:15px}
+#fc-modal .price{font-family:var(--head);font-size:42px;color:var(--ink);margin:12px 0 2px}
+#fc-modal input{width:100%;padding:12px;border:1.5px solid #ddd3bf;font-size:16px;text-align:center;letter-spacing:1px;margin:12px 0 10px;text-transform:uppercase}
+#fc-modal .buy{display:block;background:var(--black);color:#fff;padding:13px;font-weight:700;text-decoration:none;margin-top:14px;font-family:var(--head)}
+#fc-modal .act{width:100%;background:var(--cyan);color:#fff;border:0;padding:13px;font-weight:700;font-size:16px;cursor:pointer}
+#fc-modal .x{float:right;background:none;border:0;font-size:21px;cursor:pointer;color:#8b8074}
+#fc-err{color:#c0392b;font-size:14px;min-height:19px}
+#fc-done-panel{display:none}
+.confetti{position:fixed;top:-12px;z-index:1001;pointer-events:none;border-radius:2px}
+@keyframes fcfall{to{transform:translateY(105vh) rotate(720deg)}}
+.shake{animation:shk .3s}
+@keyframes shk{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+#cmp-pill{position:fixed;right:16px;bottom:64px;z-index:998;background:#fff;border:1.5px solid var(--ink);color:var(--ink);padding:10px 16px;font-weight:700;font-size:14px;cursor:pointer;box-shadow:0 10px 24px rgba(30,42,48,.25);font-family:var(--head)}
+#cmp-pill:hover{background:var(--sky)}
+#cmp-mask{position:fixed;inset:0;background:rgba(17,17,17,.74);z-index:1002;display:none;align-items:center;justify-content:center;padding:16px}
+#cmp-box{background:#fff;max-width:920px;width:96vw;overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,.45)}
+.cmp-head{display:flex;align-items:center;gap:12px;background:var(--black);color:#fff;padding:13px 18px;font-size:15px;font-family:var(--head)}
+.cmp-head b{flex:1}
+.cmp-head button{background:none;border:0;color:#fff;font-size:22px;cursor:pointer;line-height:1}
+.cmp-frame{height:450px;overflow:hidden;background:#cfc8ba;position:relative}
+.cmp-frame iframe{width:1180px;height:780px;border:0;transform:scale(.75);transform-origin:0 0}
+.cmp-foot{display:flex;gap:14px;align-items:center;flex-wrap:wrap;padding:14px 18px;font-size:15px;color:var(--mut)}
+.cmp-foot button{margin-left:auto;background:var(--cyan);color:#fff;border:0;padding:10px 18px;font-weight:700;cursor:pointer;font-family:var(--head)}
+#lb-mask{position:fixed;inset:0;background:rgba(17,17,17,.85);z-index:1003;display:none;align-items:center;justify-content:center;padding:20px}
+#lb-mask.open{display:flex}
+#lb-box{position:relative;max-width:94vw;max-height:88vh}
+#lb-box img{max-width:94vw;max-height:88vh;width:auto;height:auto;display:block;box-shadow:0 30px 70px rgba(0,0,0,.5)}
+#lb-close{position:absolute;top:-14px;right:-14px;width:36px;height:36px;border-radius:50%;background:#fff;color:var(--ink);border:0;font-size:20px;cursor:pointer;line-height:1;box-shadow:0 4px 14px rgba(0,0,0,.35)}
+#lb-prev,#lb-next{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,.45);color:#fff;border:0;font-size:26px;line-height:1;cursor:pointer}
+#lb-prev{left:14px}
+#lb-next{right:14px}
+#lb-prev:disabled,#lb-next:disabled{opacity:.3;cursor:default}
+#lb-cap{margin-top:12px;text-align:center;color:#fff;font-size:14px;font-family:var(--head)}
+footer{background:var(--black);color:#9FB0BC;padding:56px 0 0;font-size:15px}
+footer .cy-cols{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.3fr;gap:36px}
+footer h4{color:#fff;font-family:var(--head);font-size:14px;text-transform:uppercase;letter-spacing:2px;margin-bottom:16px}
+footer a{color:#9FB0BC;text-decoration:none}
+footer a:hover{color:#fff}
+footer ul{list-style:none}
+footer li{margin:9px 0}
+footer .cy-wordmark{font-family:var(--head);font-size:24px;color:#fff;text-transform:uppercase}
+footer .cy-wordmark span{color:var(--cyan)}
+footer .fc-lock{color:var(--cyan-l)}
+footer .cy-footbot{border-top:1px solid #2E343D;margin-top:44px;padding:18px 0 20px;font-size:13.5px;color:#7C8FA3;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+footer .cy-footbot a{color:#9FB0BC}
+@media(max-width:960px){.cy-hero{grid-template-columns:1fr}.cy-hero .cy-txt{padding:56px 28px;border-left:0;border-top:6px solid var(--cyan)}.cy-hero h1{font-size:34px}.cy-hero .cy-pic{min-height:320px}.cy-intro,.cy-feat{grid-template-columns:1fr}.cy-capgrid{grid-template-columns:1fr}.cy-steps{grid-template-columns:1fr;gap:28px}.cy-steps::before{display:none}.cy-team{grid-template-columns:1fr}.kcard{width:100%;padding:0 0 18px}.cy-contact,.cy-cat{grid-template-columns:1fr}.cy-checks{grid-template-columns:1fr}footer .cy-cols,.cy-prefoot .cy-cols{grid-template-columns:1fr 1fr}.cmp-frame{height:360px}.cmp-frame iframe{transform:scale(.31)}}
+</style></head>
+<body>
+<div class="cy-band"><div class="cy-wrap"><span>Airport casework since 1949</span><a href="contact.html">Start a project &rsaquo;</a></div></div>
+<header class="cy-hd"><div class="cy-wrap"><a class="cy-brand" href="index.html"><img src="/assets/img/jensen/logo.jpg" alt="Jensen Cabinet, Inc."><span><span class="cy-n">Jensen <span>Cabinet, Inc.</span></span><span class="cy-s">Quality Casework Since 1949</span></span></a><nav><a href="index.html">Home</a><a href="about-us.html">About Us</a><span class="cy-drop"><a href="capabilities.html">Capabilities</a><span class="cy-menu"><a href="capabilities.html">Woodworking</a><a href="capabilities-ss.html">Stainless Steel</a></span></span><a href="portfolio.html" class="on">Portfolio</a><a href="contact.html">Contact</a><a class="cy-btn cy-hdcta" href="contact.html">Get an estimate</a></nav></div></header><div class="cy-pagehead"><div class="cy-wrap"><div class="cy-crumb"><a href="index.html">Home</a> / Portfolio</div><h1>Portfolio</h1><p>Our casework can be found at airports all throughout the United States as well as Canada, Mexico, Caribbean, Europe, Pacific Rim, Middle East, Central and South America.</p></div></div><section><div class="cy-wrap"><div class="ftabs"><button type="button" class="ftab on" data-filter="all">All</button><button type="button" class="ftab" data-filter="delta">Delta</button><button type="button" class="ftab" data-filter="american">American Airlines</button><button type="button" class="ftab" data-filter="laguardia">LaGuardia</button></div><div class="gal2" id="gal-grid"><div class="kcard" data-cat="american"><div class="ph"><img src="/assets/img/jensen/big/tile8.jpg" data-full="/assets/img/jensen/big/tile8.jpg" alt="American Airlines — Front"></div></div><div class="kcard" data-cat="delta"><div class="ph"><img src="/assets/img/jensen/thumbs/Delta_Customer_Service_Desk2_lr.jpg" data-full="/assets/img/jensen/big/Delta_Customer_Service_Desk2.jpg" alt="Delta Customer Service Desk"></div></div><div class="kcard" data-cat="delta"><div class="ph"><img src="/assets/img/jensen/big/tile10.jpg" data-full="/assets/img/jensen/big/tile10.jpg" alt="Delta Position Gate Podium"></div></div><div class="kcard" data-cat="delta"><div class="ph"><img src="/assets/img/jensen/thumbs/Delta_Greet_Podium1_lr.jpg" data-full="/assets/img/jensen/big/Delta_Greet_Podium1.jpg" alt="Delta Greet Podium"></div></div><div class="kcard" data-cat="laguardia"><div class="ph"><img src="/assets/img/jensen/thumbs/LaGuardia_One_Position_Podium2_lr.jpg" data-full="/assets/img/jensen/big/LaGuardia_One_Position_Podium2.jpg" alt="LaGuardia One-Position Podium"></div></div><div class="kcard" data-cat="delta"><div class="ph"><img src="/assets/img/jensen/big/tile3.jpg" data-full="/assets/img/jensen/big/tile3.jpg" alt="Delta Position Gate Podium"></div></div><div class="kcard" data-cat="delta"><div class="ph"><img src="/assets/img/jensen/thumbs/Delta_Greet_Podium3_lr.jpg" data-full="/assets/img/jensen/big/Delta_Greet_Podium3.jpg" alt="Delta Greet Podium"></div></div><div class="kcard" data-cat="delta"><div class="ph"><img src="/assets/img/jensen/thumbs/Delta_Greet_Podium2_lr.jpg" data-full="/assets/img/jensen/big/Delta_Greet_Podium2.jpg" alt="Delta Greet Podium"></div></div><div class="kcard" data-cat="delta"><div class="ph"><img src="/assets/img/jensen/thumbs/Delta_Greet_Podium4_lr.jpg" data-full="/assets/img/jensen/big/Delta_Greet_Podium4.jpg" alt="Delta Greet Podium"></div></div><div class="kcard" data-cat="laguardia"><div class="ph"><img src="/assets/img/jensen/thumbs/LaGuardia_Two_Position_Podium2_lr.jpg" data-full="/assets/img/jensen/big/LaGuardia_Two_Position_Podium2.jpg" alt="LaGuardia Two-Position Podium"></div></div><div class="kcard" data-cat="american"><div class="ph"><img src="/assets/img/jensen/big/tile7.jpg" data-full="/assets/img/jensen/big/tile7.jpg" alt="American Airlines — Back"></div></div><div class="kcard" data-cat="laguardia"><div class="ph"><img src="/assets/img/jensen/thumbs/LaGuardia_Two_Position_Podium1_lr.jpg" data-full="/assets/img/jensen/big/LaGuardia_Two_Position_Podium1.jpg" alt="LaGuardia Two-Position Podium"></div></div><div class="kcard" data-cat="delta"><div class="ph"><img src="/assets/img/jensen/big/tile13.jpg" data-full="/assets/img/jensen/big/tile13.jpg" alt="Delta Position Gate Podium"></div></div><div class="kcard" data-cat="american"><div class="ph"><img src="/assets/img/jensen/big/tile5.jpg" data-full="/assets/img/jensen/big/tile5.jpg" alt="American Airlines — Back"></div></div><div class="kcard" data-cat="american"><div class="ph"><img src="/assets/img/jensen/big/tile2.jpg" data-full="/assets/img/jensen/big/tile2.jpg" alt="American Airlines — Back"></div></div><div class="kcard" data-cat="delta"><div class="ph"><img src="/assets/img/jensen/big/tile15.jpg" data-full="/assets/img/jensen/big/tile15.jpg" alt="Delta Position Gate Podium"></div></div><div class="kcard" data-cat="delta"><div class="ph"><img src="/assets/img/jensen/big/tile14.jpg" data-full="/assets/img/jensen/big/tile14.jpg" alt="Delta Position Gate Podium"></div></div><div class="kcard" data-cat="delta"><div class="ph"><img src="/assets/img/jensen/thumbs/Delta_Customer_Service_Desk1_lr.jpg" data-full="/assets/img/jensen/big/Delta_Customer_Service_Desk1.jpg" alt="Delta Customer Service Desk"></div></div><div class="kcard" data-cat="american"><div class="ph"><img src="/assets/img/jensen/big/tile9.jpg" data-full="/assets/img/jensen/big/tile9.jpg" alt="American Airlines — Front"></div></div><div class="kcard" data-cat="delta"><div class="ph"><img src="/assets/img/jensen/big/tile12.jpg" data-full="/assets/img/jensen/big/tile12.jpg" alt="Delta Position Gate Podium"></div></div><div class="kcard" data-cat="american"><div class="ph"><img src="/assets/img/jensen/big/tile4.jpg" data-full="/assets/img/jensen/big/tile4.jpg" alt="American Airlines — Front"></div></div><div class="kcard" data-cat="american"><div class="ph"><img src="/assets/img/jensen/big/tile1.jpg" data-full="/assets/img/jensen/big/tile1.jpg" alt="American Airlines — Front"></div></div><div class="kcard" data-cat="delta"><div class="ph"><img src="/assets/img/jensen/big/tile6.jpg" data-full="/assets/img/jensen/big/tile6.jpg" alt="Delta Position Gate Podium"></div></div><div class="kcard" data-cat="delta"><div class="ph"><img src="/assets/img/jensen/big/tile11.jpg" data-full="/assets/img/jensen/big/tile11.jpg" alt="Delta Position Gate Podium"></div></div><div class="kcard" data-cat="delta"><div class="ph"><img src="/assets/img/jensen/big/tile16.jpg" data-full="/assets/img/jensen/big/tile16.jpg" alt="Delta Position Gate Podium"></div></div><div class="kcard" data-cat="laguardia"><div class="ph"><img src="/assets/img/jensen/thumbs/LaGuardia_One_Position_Podium1_lr.jpg" data-full="/assets/img/jensen/big/LaGuardia_One_Position_Podium1.jpg" alt="LaGuardia One-Position Podium"></div></div></div></div></section><div class="cy-prefoot"><div class="cy-wrap"><div class="cy-cols"><div><div class="cy-wordmark">Jensen <span>Cabinet, Inc.</span></div><p style="margin-top:12px">Recognized as one of the world&rsquo;s finest quality airport casework manufacturers.</p><p style="margin-top:10px">Fort Wayne, Indiana</p></div><div><h4>Explore</h4><ul><li><a href="about-us.html">About Us</a></li><li><a href="capabilities.html">Woodworking</a></li><li><a href="capabilities-ss.html">Stainless Steel</a></li><li><a href="portfolio.html">Portfolio</a></li><li><a href="contact.html">Contact</a></li></ul></div><div><h4>What We Build</h4><ul><li><a href="capabilities.html">Woodworking</a></li><li><a href="capabilities-ss.html">Stainless Steel</a></li><li><a href="portfolio.html">Airport casework</a></li><li><a href="portfolio.html">Commercial casework</a></li></ul></div><div><h4>Contact</h4><ul><li>Phone: <span class="fc-lock" data-v="(260) 456-2131" data-ph="(123) 456-7890">(123) 456-7890</span></li><li>Email: <span class="fc-lock" data-v="Brian.Robertson@jensencabinet.com" data-ph="sample@revampwright.com">sample@revampwright.com</span></li><li>205 East Murray Street, Fort Wayne, IN 46803</li></ul></div></div></div></div><footer><div class="cy-wrap"><div class="cy-cols"><div><div class="cy-wordmark">Jensen <span>Cabinet, Inc.</span></div><p style="margin-top:12px">Architectural casework for airports and commercial spaces &mdash; founded in Fort Wayne, Indiana in 1949.</p><p style="margin-top:10px">Fort Wayne, Indiana</p></div><div><h4>Explore</h4><ul><li><a href="about-us.html">About Us</a></li><li><a href="capabilities.html">Woodworking</a></li><li><a href="capabilities-ss.html">Stainless Steel</a></li><li><a href="portfolio.html">Portfolio</a></li><li><a href="contact.html">Contact</a></li></ul></div><div><h4>What We Build</h4><ul><li><a href="capabilities.html">Woodworking</a></li><li><a href="capabilities-ss.html">Stainless Steel</a></li><li><a href="portfolio.html">Airport casework</a></li><li><a href="portfolio.html">Commercial casework</a></li><li><a href="contact.html">Start a project</a></li></ul></div><div><h4>Contact</h4><ul><li>Phone: <span class="fc-lock" data-v="(260) 456-2131" data-ph="(123) 456-7890">(123) 456-7890</span></li><li>Email: <span class="fc-lock" data-v="Brian.Robertson@jensencabinet.com" data-ph="sample@revampwright.com">sample@revampwright.com</span></li><li>205 East Murray Street, Fort Wayne, IN 46803</li></ul></div></div><div class="cy-footbot"><span>&copy; Jensen Cabinet, Inc.</span><span>Architectural casework &middot; Fort Wayne, IN</span><a href="#">Back to top &uarr;</a></div></div></footer><button id="cmp-pill" type="button">&#128336; Before: our old website</button><div id="cmp-mask"><div id="cmp-box"><div class="cmp-head"><b>Our old website &mdash; the site as it looks today</b><button id="cmp-close" type="button">&times;</button></div><div class="cmp-frame"><iframe src="old.html" title="Jensen Cabinet, Inc. &mdash; old website" loading="lazy"></iframe></div><div class="cmp-foot"><span>Same business, same workshop, same phone number. Only the website changed.</span><button id="cmp-after" type="button">See the new one &rarr;</button></div></div></div><div id="lb-mask"><div id="lb-box"><button id="lb-close" type="button" aria-label="Close">&times;</button><img id="lb-img" alt=""><button id="lb-prev" type="button" aria-label="Previous">&#8249;</button><button id="lb-next" type="button" aria-label="Next">&#8250;</button><div id="lb-cap"></div></div></div><div id="fc-bar"><span id="fc-bar-t">This is a finished website in preview &mdash; contact details activate when the owner activates the site.</span><a class="fc-swap" href="/p/jensen-79732e95/portfolio.html">Not your style? See the other design &rsaquo;</a><button id="fc-bar-b" type="button">Activate &mdash; $499</button></div><div id="fc-mask"><div id="fc-modal"><div id="fc-form-panel"><button class="x" id="fc-close" type="button">&times;</button><h3>Activate this website</h3><p>One-time payment. Includes the first 12 months of hosting &amp; care, then $299/year (cancel anytime).</p><div class="price">$499</div><p>7-day money-back guarantee.</p><a class="buy" href="/pricing.html">Buy &amp; get your activation code</a><p style="margin:16px 0 0">Already have a code?</p><input id="fc-code" type="text" placeholder="ENTER CODE" autocomplete="off"><div id="fc-err"></div><button class="act" id="fc-go" type="button">Activate my website</button><p style="margin-top:12px;font-size:13.5px">Your activation code was emailed to you and is shown on your payment success page.</p></div><div id="fc-done-panel"><div style="font-size:44px">&#127881;</div><h3>Your website is live!</h3><p>Congratulations &mdash; this website is now officially open at<br><b>jensencabinet.revampwright.com</b></p><p style="margin-top:10px">Your free custom domain (.cc) will be connected within 24 hours. Dashboard access details are on their way to your inbox.</p><button class="act" id="fc-close2" type="button" style="margin-top:16px">View my live website</button></div></div></div><script>
+(function(){
+var CODE='RW-2026-WHW0',KEY='rw_act_demo',done=false;
+function $(s){return document.querySelector(s)}
+function setDone(){done=true;$('#fc-bar').style.display='none';var cp=document.getElementById('cmp-pill');if(cp)cp.style.display='none';document.body.style.paddingBottom='0';document.querySelectorAll('.fc-lock').forEach(function(el){el.textContent=el.getAttribute('data-v');el.classList.remove('fc-peek');el.classList.add('fc-live');});}
+function openM(){if(done)return;$('#fc-mask').style.display='flex';setTimeout(function(){$('#fc-code').focus()},60);}
+function closeM(){$('#fc-mask').style.display='none';}
+function confetti(){var colors=['#00BCD4','#111111','#008BA3','#E3F4F7','#7FD8E6'];for(var i=0;i<110;i++){var d=document.createElement('div');d.className='confetti';var s=6+Math.random()*7;d.style.cssText='left:'+(Math.random()*100)+'vw;width:'+s+'px;height:'+(s*0.55)+'px;background:'+colors[i%colors.length]+';animation:fcfall '+(2.2+Math.random()*1.8)+'s ease-in forwards;transform:rotate('+(Math.random()*360)+'deg)';document.body.appendChild(d);setTimeout(function(el){el.remove()},4500,d);}}
+function tryAct(){var v=$('#fc-code').value.trim().toUpperCase();if(v===CODE){closeM();setDone();confetti();$('#fc-mask').style.display='flex';$('#fc-form-panel').style.display='none';$('#fc-done-panel').style.display='block';}else{$('#fc-err').textContent='That code doesn\'t match. Please check the code in your email and try again.';$('#fc-modal').classList.remove('shake');void $('#fc-modal').offsetWidth;$('#fc-modal').classList.add('shake');}}
+document.addEventListener('DOMContentLoaded',function(){
+  function postForm(fd,b,okText){fetch('/api/contact',{method:'POST',body:fd}).then(function(r){return r.json();}).then(function(j){if(j.ok){b.textContent=okText;}else{b.disabled=false;b.textContent='Something went wrong \u2014 please call or email instead';}}).catch(function(){b.disabled=false;b.textContent='Something went wrong \u2014 please call or email instead';});}
+  var qf=document.getElementById('qform');
+  if(qf){qf.addEventListener('submit',function(e){e.preventDefault();if(!done){openM();return;}var b=document.getElementById('qbtn');b.disabled=true;b.textContent='Sending\u2026';postForm(new FormData(qf),b,'\u2713 Request received');});}
+  var mf=document.getElementById('mform');
+  if(mf){mf.addEventListener('submit',function(e){e.preventDefault();if(!done){openM();return;}var b=document.getElementById('mbtn');b.disabled=true;b.textContent='Sending\u2026';var fd=new FormData(mf);var ph=(fd.get('phone')||'').toString().trim(),em=(fd.get('email')||'').toString().trim();fd.set('project','Moulding order \u2014 '+((fd.get('product_code')||'').toString().trim()));fd.set('contact',ph+(em?(' / '+em):''));fd.set('notes','Dimensions: '+((fd.get('dimensions')||'').toString().trim())+'; Quantity: '+((fd.get('quantity')||'').toString().trim())+'; Wood species: '+((fd.get('wood_species')||'').toString().trim()));postForm(fd,b,'\u2713 Order received');});}
+  var nf=document.getElementById('nform');
+  if(nf){nf.addEventListener('submit',function(e){e.preventDefault();if(!done){openM();return;}var b=document.getElementById('nbtn');b.disabled=true;b.textContent='Subscribing\u2026';var fd=new FormData();fd.set('name','Newsletter subscriber');fd.set('project','Newsletter signup');fd.set('contact',(nf.querySelector('[name=nemail]').value||'').trim());fd.set('notes','');var tk=nf.querySelector('[name=cf-turnstile-response]');if(tk)fd.set('cf-turnstile-response',tk.value);postForm(fd,b,'\u2713 Subscribed');});}
+  document.addEventListener('click',function(e){
+    var t=e.target.closest('[data-fc-open],.fc-lock');
+    if(t&&!done){e.preventDefault();openM();}
+    if(e.target.id==='fc-mask'){closeM();}
+    if(e.target.id==='fc-close'||e.target.id==='fc-close2'){closeM();}
+    if(e.target.id==='fc-go'){tryAct();}
+    if(e.target.id==='fc-bar-b'){openM();}
+    if(e.target.id==='cmp-pill'){$('#cmp-mask').style.display='flex';}
+    if(e.target.id==='cmp-mask'||e.target.id==='cmp-close'||e.target.id==='cmp-after'){$('#cmp-mask').style.display='none';}
+  });
+  document.addEventListener('mouseover',function(e){var t=e.target.closest('.fc-lock');if(t&&!done){t.textContent=t.getAttribute('data-v');t.classList.add('fc-peek');}});
+  document.addEventListener('mouseout',function(e){var t=e.target.closest('.fc-lock');if(t&&!done){t.textContent=t.getAttribute('data-ph');t.classList.remove('fc-peek');}});
+  var ftabs=document.querySelectorAll('.ftab'),ggrid=document.getElementById('gal-grid');
+  if(ggrid&&window.jQuery){var $grid=jQuery('#gal-grid');$grid.isotope({itemSelector:'.kcard',layoutMode:'fitRows'});
+  ftabs.forEach(function(b){b.addEventListener('click',function(){ftabs.forEach(function(x){x.classList.remove('on')});b.classList.add('on');var f=b.getAttribute('data-filter');$grid.isotope({filter:f==='all'?'*':function(){return jQuery(this).attr('data-cat')===f;}});});});}
+  var lbm=document.getElementById('lb-mask'),lbi=document.getElementById('lb-img'),lbCap=document.getElementById('lb-cap'),lbPrev=document.getElementById('lb-prev'),lbNext=document.getElementById('lb-next'),lbList=[],lbIdx=0,lbCapFn=null;
+  function lbShow(i){lbIdx=i;var card=lbList[lbIdx];var im=card.querySelector('.ph img');if(im)lbi.src=im.getAttribute('data-full')||im.getAttribute('src');lbCap.textContent=lbCapFn?lbCapFn(card,lbIdx,lbList.length):('Image '+(lbIdx+1)+' of '+lbList.length);lbPrev.disabled=(lbIdx===0);lbNext.disabled=(lbIdx===lbList.length-1);}
+  function openLb(gridSel,card,capFn){var grid=document.querySelector(gridSel);if(!grid)return;lbList=Array.prototype.filter.call(grid.querySelectorAll('.kcard,.dcard'),function(c){return !c.classList.contains('isotope-hidden');});lbCapFn=capFn||null;var i=lbList.indexOf(card);if(i<0)i=0;lbShow(i);lbm.classList.add('open');}
+  function closeLb(){lbm.classList.remove('open');lbi.removeAttribute('src');}
+  function doorCap(card,i,n){return card.getAttribute('data-fin')+' \u2014 '+card.getAttribute('data-sty')+' \u00b7 '+(i+1)+' of '+n;}
+  document.querySelectorAll('#gal-grid .kcard').forEach(function(c){c.addEventListener('click',function(){openLb('#gal-grid',c,null);});});
+  document.querySelectorAll('#door-grid .dcard').forEach(function(c){c.addEventListener('click',function(){openLb('#door-grid',c,doorCap);});});
+  var lbClose=document.getElementById('lb-close');if(lbClose){lbClose.addEventListener('click',function(e){e.stopPropagation();closeLb();});}
+  if(lbPrev){lbPrev.addEventListener('click',function(e){e.stopPropagation();if(lbIdx>0)lbShow(lbIdx-1);});}
+  if(lbNext){lbNext.addEventListener('click',function(e){e.stopPropagation();if(lbIdx<lbList.length-1)lbShow(lbIdx+1);});}
+  if(lbm){lbm.addEventListener('click',function(e){if(e.target===lbm)closeLb();});}
+  document.addEventListener('keydown',function(e){if(!lbm.classList.contains('open'))return;if(e.key==='Escape')closeLb();else if(e.key==='ArrowLeft'&&lbIdx>0)lbShow(lbIdx-1);else if(e.key==='ArrowRight'&&lbIdx<lbList.length-1)lbShow(lbIdx+1);});
+  $('#fc-code').addEventListener('keydown',function(e){if(e.key==='Enter'){tryAct();}});
+  if (location.hostname.endsWith('.revampwright.com')&&location.hostname!=='www.revampwright.com'){setDone();}
+  if (new URLSearchParams(location.search).get('activate')==='1'){openM();}
+});
+  window.addEventListener('pageshow',function(){if(new URLSearchParams(location.search).get('activate')==='1'){openM();}});
+})();
+</script><script>
+// Visit tracking (first-party, no cookies): records a page view on load and
+// the dwell time when the page is hidden. Sent to /api/track, stored in D1.
+// Heartbeat: every 30s while the page is visible, records current dwell, so a
+// single-page visit closed directly still leaves a dwell record.
+(function(){try{var sid=sessionStorage.getItem('rw_sid');if(!sid){sid=Math.random().toString(36).slice(2)+Date.now().toString(36);sessionStorage.setItem('rw_sid',sid);}var start=Date.now();var finalSent=false;function send(ev,dw){var body=JSON.stringify({host:location.hostname,path:location.pathname,session:sid,event:ev,dwell_ms:dw||0,referrer:document.referrer||''});if(navigator.sendBeacon){navigator.sendBeacon('/api/track',new Blob([body],{type:'application/json'}));}else{fetch('/api/track',{method:'POST',headers:{'Content-Type':'application/json'},body:body,keepalive:true}).catch(function(){});}}send('view',0);function dwell(){if(finalSent)return;finalSent=true;send('dwell',Date.now()-start);}setInterval(function(){if(!finalSent&&document.visibilityState==='visible')send('dwell',Date.now()-start);},30000);document.addEventListener('visibilitychange',function(){if(document.visibilityState==='hidden')dwell();});window.addEventListener('pagehide',dwell);}catch(e){}})();
+</script></body></html>
